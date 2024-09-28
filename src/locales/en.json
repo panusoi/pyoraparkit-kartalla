@@ -5,6 +5,23 @@
       "closest": "Closest",
       "info": "Info",
       "settings": "Settings"
+    },
+    "settings": {
+      "language": {
+        "label": "Select language",
+        "options": {
+          "en": "English",
+          "fi": "Suomi"
+        }
+      },
+      "theme": {
+        "label": "Select theme",
+        "options": {
+          "auto": "Auto",
+          "light": "Light",
+          "dark": "Dark"
+        }
+      }
     }
   }
 }

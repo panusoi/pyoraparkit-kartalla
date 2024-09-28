@@ -5,6 +5,23 @@
       "closest": "Lähimmät",
       "info": "Info",
       "settings": "Asetukset"
+    },
+    "settings": {
+      "language": {
+        "label": "Valitse kieli",
+        "options": {
+          "en": "English",
+          "fi": "Suomi"
+        }
+      },
+      "theme": {
+        "label": "Valitse ulkoasu",
+        "options": {
+          "auto": "Auto",
+          "light": "Vaalea",
+          "dark": "Tumma"
+        }
+      }
     }
   }
 }
