@@ -2,7 +2,7 @@
 import 'leaflet/dist/leaflet.css';
 import i18next from 'i18next';
 import { applyTheme } from '../../utils/theme';
-import StyledSelect from '../../components/StyledSelect.vue';
+import StyledSelect from '../../components/Form/StyledSelect.vue';
 import { ref } from 'vue';
 import { getLanguage } from '../../utils/language';
 
