@@ -1,5 +1,10 @@
 {
   "app": {
-    "name": "Pyöräparkit kartalla FI"
+    "name": "Pyöräparkit kartalla FI",
+    "tabs": {
+      "closest": "Lähimmät",
+      "info": "Info",
+      "settings": "Asetukset"
+    }
   }
 }
