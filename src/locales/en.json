@@ -6,6 +6,23 @@
       "info": "Info",
       "settings": "Settings"
     },
+    "parkingSpot": {
+      "spots": "spots",
+      "frameLock": {
+        "true": "Frame lockable",
+        "false": "Not frame lockable"
+      },
+      "type": {
+        "BIKE_PARKING": "Bike parking",
+        "CONNECTION_PARKING": "Connection parking"
+      },
+      "status": {
+        "IN_USE": "In use",
+        "NOT_IN_USE": "Not in use"
+      },
+      "showImage": "View image",
+      "showOnMap": "Show on Map"
+    },
     "settings": {
       "language": {
         "label": "Select language",

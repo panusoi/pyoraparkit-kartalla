@@ -6,6 +6,23 @@
       "info": "Info",
       "settings": "Asetukset"
     },
+    "parkingSpot": {
+      "spots": "paikkaa",
+      "frameLock": {
+        "true": "Runkolukitus",
+        "false": "Ei runkolukitusta"
+      },
+      "type": {
+        "BIKE_PARKING": "Pyöräpysäköinti",
+        "CONNECTION_PARKING": "Liityntäpysäköinti"
+      },
+      "status": {
+        "IN_USE": "Käytössä",
+        "NOT_IN_USE": "Ei käytössä"
+      },
+      "showImage": "Katso kuva",
+      "showOnMap": "Näytä kartalla"
+    },
     "settings": {
       "language": {
         "label": "Valitse kieli",
