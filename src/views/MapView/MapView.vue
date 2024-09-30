@@ -1,10 +1,27 @@
 <script setup lang="ts">
 import 'leaflet/dist/leaflet.css';
-import { LMap, LTileLayer, LControlZoom, LControl, LMarker } from '@vue-leaflet/vue-leaflet';
-import { inject } from 'vue';
+import {
+  LMap,
+  LTileLayer,
+  LControlZoom,
+  LControl,
+  LMarker,
+  LCircleMarker,
+} from '@vue-leaflet/vue-leaflet';
+import { inject, ref, watchEffect } from 'vue';
 import { MenuOpenInjectionKey, MenuToggleInjectionKey } from '../../injection/menu.injection';
 import IconBars3 from '../../components/icons/IconBars3.vue';
 import tampereParkingSpots from '../../data/tampere';
+import { CurrentLocationInjectionKey } from '../../injection/location.injection';
+
+const center = ref<[number, number]>([61.49911, 23.78712]);
+const currentLocation = inject(CurrentLocationInjectionKey);
+
+watchEffect(() => {
+  if (currentLocation?.value.status === 'current') {
+    center.value = [currentLocation.value.lat, currentLocation.value.lng];
+  }
+});
 
 const menuOpen = inject(MenuOpenInjectionKey, null);
 const toggleMenu = inject(MenuToggleInjectionKey, () => undefined);
@@ -13,8 +30,8 @@ const toggleMenu = inject(MenuToggleInjectionKey, () => undefined);
 <template>
   <l-map
     ref="map"
-    :zoom="12"
-    :center="[61.49911, 23.78712]"
+    :zoom="16"
+    :center="center"
     :useGlobalLeaflet="false"
     :options="{ zoomControl: false }"
   >
@@ -37,6 +54,12 @@ const toggleMenu = inject(MenuToggleInjectionKey, () => undefined);
         <IconBars3 />
       </button>
     </l-control>
+    <l-circle-marker
+      v-if="currentLocation?.status === 'current'"
+      :lat-lng="[currentLocation.lat, currentLocation.lng]"
+      :radius="10"
+      color="red"
+    ></l-circle-marker>
     <template v-for="spot in tampereParkingSpots" :key="spot.id">
       <l-marker :lat-lng="[spot.coordinates.lat, spot.coordinates.lng]"> </l-marker>
     </template>
