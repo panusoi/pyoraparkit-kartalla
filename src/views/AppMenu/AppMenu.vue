@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import 'leaflet/dist/leaflet.css';
 
-import { inject } from 'vue';
 import { TabGroup, TabPanels } from '@headlessui/vue';
 import { XMarkIcon } from '@heroicons/vue/20/solid';
 import StyledTabList from '../../components/Tab/StyledTabList.vue';
@@ -10,8 +9,10 @@ import StyledTabPanel from '../../components/Tab/StyledTabPanel.vue';
 import ClosestParkingSpots from './ClosestParkingSpots.vue';
 import AppSettings from './AppSettings.vue';
 import AppInfo from './AppInfo.vue';
-import { MenuToggleInjectionKey } from '../../injection/menu.injection';
-const toggleMenu = inject(MenuToggleInjectionKey, () => undefined);
+import { IsMenuOpenInjectionKey } from '../../injection/menu.injection';
+import { injectStrict } from '../../utils/inject';
+
+const isMenuOpen = injectStrict(IsMenuOpenInjectionKey);
 </script>
 
 <template>
@@ -22,7 +23,7 @@ const toggleMenu = inject(MenuToggleInjectionKey, () => undefined);
         type="button"
         class="m-2 rounded-full bg-primary-light-100/20 p-1 text-primary-light-500 hover:text-primary-light-700 md:collapse dark:bg-primary-dark-400/20 dark:text-primary-dark-500 dark:hover:text-primary-dark-700"
         :aria-label="$t('menu.close')"
-        @click="toggleMenu()"
+        @click="isMenuOpen = false"
       >
         <XMarkIcon class="size-5" />
       </button>

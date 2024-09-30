@@ -27,15 +27,8 @@ if ('geolocation' in navigator) {
   currentLocation.value = { status: 'unsupported' };
 }
 
-function focusOnParkingSpot(coordinates: LatLng) {
-  focusedParkingSpot.value = coordinates;
-}
-
 provide(CurrentLocationInjectionKey, currentLocation);
-provide(FocusedParkingSpotInjectionKey, {
-  coordinates: focusedParkingSpot,
-  focus: focusOnParkingSpot,
-});
+provide(FocusedParkingSpotInjectionKey, focusedParkingSpot);
 </script>
 
 <template>

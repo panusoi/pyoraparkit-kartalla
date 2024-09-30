@@ -8,36 +8,32 @@ import {
   LMarker,
   LCircleMarker,
 } from '@vue-leaflet/vue-leaflet';
-import { inject, ref, watchEffect } from 'vue';
+import { ref, watchEffect } from 'vue';
 import { Bars3Icon } from '@heroicons/vue/20/solid';
-import { MenuOpenInjectionKey, MenuToggleInjectionKey } from '../../injection/menu.injection';
 import tampereParkingSpots from '../../data/tampere';
 import {
   CurrentLocationInjectionKey,
   FocusedParkingSpotInjectionKey,
 } from '../../injection/location.injection';
+import { IsMenuOpenInjectionKey } from '../../injection/menu.injection';
+import { injectStrict } from '../../utils/inject';
 
 const center = ref<[number, number]>([61.49911, 23.78712]);
-const currentLocation = inject(CurrentLocationInjectionKey);
-const focusedParkingSpot = inject(FocusedParkingSpotInjectionKey);
+const currentLocation = injectStrict(CurrentLocationInjectionKey);
+const focusedParkingSpot = injectStrict(FocusedParkingSpotInjectionKey);
+const isMenuOpen = injectStrict(IsMenuOpenInjectionKey);
 
 watchEffect(() => {
-  if (currentLocation?.value.status === 'current') {
+  if (currentLocation.value.status === 'current') {
     center.value = [currentLocation.value.lat, currentLocation.value.lng];
   }
 });
 
 watchEffect(() => {
-  if (focusedParkingSpot && focusedParkingSpot.coordinates.value) {
-    center.value = [
-      focusedParkingSpot.coordinates.value.lat,
-      focusedParkingSpot.coordinates.value.lng,
-    ];
+  if (focusedParkingSpot.value) {
+    center.value = [focusedParkingSpot.value.lat, focusedParkingSpot.value.lng];
   }
 });
-
-const menuOpen = inject(MenuOpenInjectionKey, null);
-const toggleMenu = inject(MenuToggleInjectionKey, () => undefined);
 </script>
 
 <template>
@@ -58,11 +54,11 @@ const toggleMenu = inject(MenuToggleInjectionKey, () => undefined);
     <l-control position="bottomleft">
       <button
         :class="[
-          menuOpen ? 'collapse' : 'visible',
+          isMenuOpen ? 'collapse' : 'visible',
           'bg-slate-50 p-4 hover:bg-slate-200 md:collapse',
         ]"
         :aria-label="$t('menu.open')"
-        @click="toggleMenu()"
+        @click="isMenuOpen = true"
       >
         <Bars3Icon class="size-5" />
       </button>
@@ -74,11 +70,8 @@ const toggleMenu = inject(MenuToggleInjectionKey, () => undefined);
       color="red"
     ></l-circle-marker>
     <l-circle-marker
-      v-if="focusedParkingSpot?.coordinates.value"
-      :lat-lng="[
-        focusedParkingSpot.coordinates.value.lat,
-        focusedParkingSpot.coordinates.value.lng,
-      ]"
+      v-if="focusedParkingSpot"
+      :lat-lng="[focusedParkingSpot.lat, focusedParkingSpot.lng]"
       :radius="10"
       color="blue"
     ></l-circle-marker>
