@@ -8,7 +8,7 @@ A simple web app for finding the closest bike parking spot in Tampere.
 
 ### Github Pages
 
-TODO
+https://panusoi.github.io/pyoraparkit-kartalla/
 
 ### Local
 
