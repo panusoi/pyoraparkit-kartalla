@@ -11,8 +11,8 @@ export type ParkingSpot = {
   status: ParkingSpotStatus;
   image?: string;
   coordinates: {
-    lon: number;
     lat: number;
+    lng: number;
   };
   rack: {
     manufacturer?: string;

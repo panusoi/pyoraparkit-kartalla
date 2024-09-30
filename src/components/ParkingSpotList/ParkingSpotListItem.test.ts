@@ -6,7 +6,7 @@ import ParkingSpotListItem from './ParkingSpotListItem.vue';
 describe('ParkingSpotListItem', () => {
   const spot = {
     area: 'Amuri',
-    coordinates: { lat: 1.23, lon: 2.34 },
+    coordinates: { lat: 1.23, lng: 2.34 },
     id: 'tre:test',
     rack: {
       count: 2,
