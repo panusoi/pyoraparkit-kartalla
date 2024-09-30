@@ -23,9 +23,8 @@ const emit = defineEmits<{
       <div class="flex flex-col items-center justify-between">
         <h3 class="inline-flex flex-col items-center text-lg font-medium leading-6">
           <span data-testid="distance">{{ formatDistance(distance) }}</span>
-          <small>
-            <span>{{ area }}</span
-            ><span v-if="area"> • </span><span>{{ id }}</span>
+          <small v-if="area">
+            <span>{{ area }}</span>
           </small>
         </h3>
         <p class="mt-1 max-w-2xl text-sm text-gray-500">
