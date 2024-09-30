@@ -3,6 +3,7 @@ import 'leaflet/dist/leaflet.css';
 
 import { inject } from 'vue';
 import { TabGroup, TabPanels } from '@headlessui/vue';
+import { XMarkIcon } from '@heroicons/vue/20/solid';
 import StyledTabList from '../../components/Tab/StyledTabList.vue';
 import StyledTabButton from '../../components/Tab/StyledTabButton.vue';
 import StyledTabPanel from '../../components/Tab/StyledTabPanel.vue';
@@ -10,8 +11,6 @@ import ClosestParkingSpots from './ClosestParkingSpots.vue';
 import AppSettings from './AppSettings.vue';
 import AppInfo from './AppInfo.vue';
 import { MenuToggleInjectionKey } from '../../injection/menu.injection';
-import IconClose from '../../components/icons/IconClose.vue';
-
 const toggleMenu = inject(MenuToggleInjectionKey, () => undefined);
 </script>
 
@@ -25,7 +24,7 @@ const toggleMenu = inject(MenuToggleInjectionKey, () => undefined);
         :aria-label="$t('menu.close')"
         @click="toggleMenu()"
       >
-        <IconClose />
+        <XMarkIcon class="size-5" />
       </button>
     </div>
 

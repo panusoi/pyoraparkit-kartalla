@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@headlessui/vue": "^1.7.23",
+    "@heroicons/vue": "^2.1.5",
     "@types/proj4": "^2.5.5",
     "i18next": "^23.15.1",
     "i18next-vue": "^5.0.0",

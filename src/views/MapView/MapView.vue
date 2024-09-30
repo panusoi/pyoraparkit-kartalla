@@ -9,8 +9,8 @@ import {
   LCircleMarker,
 } from '@vue-leaflet/vue-leaflet';
 import { inject, ref, watchEffect } from 'vue';
+import { Bars3Icon } from '@heroicons/vue/20/solid';
 import { MenuOpenInjectionKey, MenuToggleInjectionKey } from '../../injection/menu.injection';
-import IconBars3 from '../../components/icons/IconBars3.vue';
 import tampereParkingSpots from '../../data/tampere';
 import {
   CurrentLocationInjectionKey,
@@ -64,7 +64,7 @@ const toggleMenu = inject(MenuToggleInjectionKey, () => undefined);
         :aria-label="$t('menu.open')"
         @click="toggleMenu()"
       >
-        <IconBars3 />
+        <Bars3Icon class="size-5" />
       </button>
     </l-control>
     <l-circle-marker
