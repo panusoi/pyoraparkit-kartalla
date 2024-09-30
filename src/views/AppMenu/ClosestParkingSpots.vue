@@ -9,9 +9,11 @@ import {
   FocusedParkingSpotInjectionKey,
 } from '../../injection/location.injection';
 import type { LatLng } from '../../types/location';
+import { MenuToggleInjectionKey } from '../../injection/menu.injection';
 
 const currentLocation = inject(CurrentLocationInjectionKey);
 const focusedParkingSpot = inject(FocusedParkingSpotInjectionKey);
+const menuToggle = inject(MenuToggleInjectionKey);
 
 const locationStatus = computed(() => currentLocation?.value.status ?? 'pending');
 
@@ -31,6 +33,7 @@ const spots = computed(() => {
 
 function onShowOnMap(coordinates: LatLng) {
   focusedParkingSpot?.focus(coordinates);
+  menuToggle?.();
 }
 </script>
 
