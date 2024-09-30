@@ -12,14 +12,27 @@ import { inject, ref, watchEffect } from 'vue';
 import { MenuOpenInjectionKey, MenuToggleInjectionKey } from '../../injection/menu.injection';
 import IconBars3 from '../../components/icons/IconBars3.vue';
 import tampereParkingSpots from '../../data/tampere';
-import { CurrentLocationInjectionKey } from '../../injection/location.injection';
+import {
+  CurrentLocationInjectionKey,
+  FocusedParkingSpotInjectionKey,
+} from '../../injection/location.injection';
 
 const center = ref<[number, number]>([61.49911, 23.78712]);
 const currentLocation = inject(CurrentLocationInjectionKey);
+const focusedParkingSpot = inject(FocusedParkingSpotInjectionKey);
 
 watchEffect(() => {
   if (currentLocation?.value.status === 'current') {
     center.value = [currentLocation.value.lat, currentLocation.value.lng];
+  }
+});
+
+watchEffect(() => {
+  if (focusedParkingSpot && focusedParkingSpot.coordinates.value) {
+    center.value = [
+      focusedParkingSpot.coordinates.value.lat,
+      focusedParkingSpot.coordinates.value.lng,
+    ];
   }
 });
 
@@ -59,6 +72,15 @@ const toggleMenu = inject(MenuToggleInjectionKey, () => undefined);
       :lat-lng="[currentLocation.lat, currentLocation.lng]"
       :radius="10"
       color="red"
+    ></l-circle-marker>
+    <l-circle-marker
+      v-if="focusedParkingSpot?.coordinates.value"
+      :lat-lng="[
+        focusedParkingSpot.coordinates.value.lat,
+        focusedParkingSpot.coordinates.value.lng,
+      ]"
+      :radius="10"
+      color="blue"
     ></l-circle-marker>
     <template v-for="spot in tampereParkingSpots" :key="spot.id">
       <l-marker :lat-lng="[spot.coordinates.lat, spot.coordinates.lng]"> </l-marker>

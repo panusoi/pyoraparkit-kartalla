@@ -4,9 +4,14 @@ import ParkingSpotList from '../../components/ParkingSpotList/ParkingSpotList.vu
 import ParkingSpotListItem from '../../components/ParkingSpotList/ParkingSpotListItem.vue';
 import tampereParkingSpots from '../../data/tampere';
 import { calculateDistance } from '../../utils/distance';
-import { CurrentLocationInjectionKey } from '../../injection/location.injection';
+import {
+  CurrentLocationInjectionKey,
+  FocusedParkingSpotInjectionKey,
+} from '../../injection/location.injection';
+import type { LatLng } from '../../types/location';
 
 const currentLocation = inject(CurrentLocationInjectionKey);
+const focusedParkingSpot = inject(FocusedParkingSpotInjectionKey);
 
 const locationStatus = computed(() => currentLocation?.value.status ?? 'pending');
 
@@ -23,6 +28,10 @@ const spots = computed(() => {
   }
   return [];
 });
+
+function onShowOnMap(coordinates: LatLng) {
+  focusedParkingSpot?.focus(coordinates);
+}
 </script>
 
 <template>
@@ -31,7 +40,12 @@ const spots = computed(() => {
   </div>
   <ParkingSpotList v-if="spots.length > 0">
     <template v-for="({ spot, distance }, idx) in spots" :key="spot.id">
-      <ParkingSpotListItem :spot="spot" :distance="distance" :border="idx > 0" />
+      <ParkingSpotListItem
+        :spot="spot"
+        :distance="distance"
+        :border="idx > 0"
+        @showOnMap="onShowOnMap(spot.coordinates)"
+      />
     </template>
   </ParkingSpotList>
 </template>

@@ -1,3 +1,8 @@
+export type LatLng = {
+  lat: number;
+  lng: number;
+};
+
 export type CurrentLocation =
   | { status: 'pending' | 'blocked' | 'unsupported' }
-  | { status: 'current'; lng: number; lat: number; timestamp: number };
+  | ({ status: 'current'; timestamp: number } & LatLng);

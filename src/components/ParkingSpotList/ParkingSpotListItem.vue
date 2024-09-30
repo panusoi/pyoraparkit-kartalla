@@ -10,10 +10,8 @@ export type ParkingSpotListItemProps = {
 };
 
 const { spot, distance, border } = defineProps<ParkingSpotListItemProps>();
-const { id, area, type, status, rack, image } = spot;
-const emit = defineEmits<{
-  (e: 'showOnMap', id: ParkingSpot['id']): void;
-}>();
+const { area, type, status, rack, image } = spot;
+const emit = defineEmits(['showOnMap']);
 </script>
 
 <template>
@@ -59,7 +57,7 @@ const emit = defineEmits<{
         <button
           type="button"
           class="font-medium text-blue-600 hover:text-blue-500 dark:text-blue-500 dark:hover:text-blue-600"
-          @click="emit('showOnMap', id)"
+          @click="emit('showOnMap')"
         >
           {{ $t('parkingSpot.showOnMap') }}
         </button>

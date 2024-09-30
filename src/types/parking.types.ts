@@ -1,3 +1,5 @@
+import type { LatLng } from './location';
+
 type ParkingSpotType = 'BIKE_PARKING' | 'CONNECTION_PARKING';
 
 type ParkingSpotStatus = 'IN_USE' | 'NOT_IN_USE';
@@ -10,10 +12,7 @@ export type ParkingSpot = {
   type: ParkingSpotType;
   status: ParkingSpotStatus;
   image?: string;
-  coordinates: {
-    lat: number;
-    lng: number;
-  };
+  coordinates: LatLng;
   rack: {
     manufacturer?: string;
     model?: string;
