@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import 'leaflet/dist/leaflet.css';
-import { LMap, LTileLayer, LControlZoom, LControl } from '@vue-leaflet/vue-leaflet';
+import { LMap, LTileLayer, LControlZoom, LControl, LMarker } from '@vue-leaflet/vue-leaflet';
 import { inject } from 'vue';
 import { MenuOpenInjectionKey, MenuToggleInjectionKey } from '../../injection/menu.injection';
 import IconBars3 from '../../components/icons/IconBars3.vue';
+import tampereParkingSpots from '../../data/tampere';
 
 const menuOpen = inject(MenuOpenInjectionKey, null);
 const toggleMenu = inject(MenuToggleInjectionKey, () => undefined);
@@ -36,5 +37,8 @@ const toggleMenu = inject(MenuToggleInjectionKey, () => undefined);
         <IconBars3 />
       </button>
     </l-control>
+    <template v-for="spot in tampereParkingSpots" :key="spot.id">
+      <l-marker :lat-lng="[spot.coordinates.lat, spot.coordinates.lng]"> </l-marker>
+    </template>
   </l-map>
 </template>
