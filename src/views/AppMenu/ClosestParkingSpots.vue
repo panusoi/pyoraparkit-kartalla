@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, inject } from 'vue';
+import { computed } from 'vue';
 import ParkingSpotList from '../../components/ParkingSpotList/ParkingSpotList.vue';
 import ParkingSpotListItem from '../../components/ParkingSpotList/ParkingSpotListItem.vue';
 import tampereParkingSpots from '../../data/tampere';
@@ -9,16 +9,17 @@ import {
   FocusedParkingSpotInjectionKey,
 } from '../../injection/location.injection';
 import type { LatLng } from '../../types/location';
-import { MenuToggleInjectionKey } from '../../injection/menu.injection';
+import { IsMenuOpenInjectionKey } from '../../injection/menu.injection';
+import { injectStrict } from '../../utils/inject';
 
-const currentLocation = inject(CurrentLocationInjectionKey);
-const focusedParkingSpot = inject(FocusedParkingSpotInjectionKey);
-const menuToggle = inject(MenuToggleInjectionKey);
+const currentLocation = injectStrict(CurrentLocationInjectionKey);
+const focusedParkingSpot = injectStrict(FocusedParkingSpotInjectionKey);
+const isMenuOpen = injectStrict(IsMenuOpenInjectionKey);
 
 const locationStatus = computed(() => currentLocation?.value.status ?? 'pending');
 
 const spots = computed(() => {
-  if (currentLocation?.value.status === 'current') {
+  if (currentLocation.value.status === 'current') {
     const currentLngLat = currentLocation.value;
     return tampereParkingSpots
       .map((spot) => ({
@@ -32,8 +33,8 @@ const spots = computed(() => {
 });
 
 function onShowOnMap(coordinates: LatLng) {
-  focusedParkingSpot?.focus(coordinates);
-  menuToggle?.();
+  focusedParkingSpot.value = coordinates;
+  isMenuOpen.value = false;
 }
 </script>
 

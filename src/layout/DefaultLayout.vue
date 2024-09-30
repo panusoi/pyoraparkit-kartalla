@@ -1,15 +1,9 @@
 <script setup lang="ts">
-import { provide, readonly, ref } from 'vue';
-import { MenuOpenInjectionKey, MenuToggleInjectionKey } from '../injection/menu.injection';
+import { provide, ref } from 'vue';
+import { IsMenuOpenInjectionKey } from '../injection/menu.injection';
 
-const menuOpen = ref(false);
-
-function toggleMenuOpen() {
-  menuOpen.value = !menuOpen.value;
-}
-
-provide(MenuToggleInjectionKey, toggleMenuOpen);
-provide(MenuOpenInjectionKey, readonly(menuOpen));
+const isMenuOpen = ref(false);
+provide(IsMenuOpenInjectionKey, isMenuOpen);
 </script>
 
 <template>
@@ -20,7 +14,7 @@ provide(MenuOpenInjectionKey, readonly(menuOpen));
       </div>
       <div
         :class="[
-          menuOpen ? 'visible' : 'collapse',
+          isMenuOpen ? 'visible' : 'collapse',
           'absolute inset-y-0 left-0 z-10 w-full bg-primary-light-50 p-4 text-primary-light-600 md:visible md:m-4 md:w-96 md:rounded-xl md:shadow-lg dark:bg-primary-dark-50 dark:text-primary-dark-600',
         ]"
       >
