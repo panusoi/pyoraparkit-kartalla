@@ -23,6 +23,14 @@
       "showImage": "Katso kuva",
       "showOnMap": "Näytä kartalla"
     },
+    "info": {
+      "dataSources": {
+        "header": "Tietolähteet",
+        "tampere": {
+          "attribution": "{ sourceLink }. Aineisto on ladattu { sourceServiceLink } -palvelusta { date } lisenssillä { licenseLink }. "
+        }
+      }
+    },
     "settings": {
       "language": {
         "label": "Valitse kieli",

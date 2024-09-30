@@ -23,6 +23,14 @@
       "showImage": "View image",
       "showOnMap": "Show on Map"
     },
+    "info": {
+      "dataSources": {
+        "header": "Data sources",
+        "tampere": {
+          "attribution": "{ sourceLink }. Data is downloaded from { sourceServiceLink } at { date } with licence { licenseLink }. "
+        }
+      }
+    },
     "settings": {
       "language": {
         "label": "Select language",
