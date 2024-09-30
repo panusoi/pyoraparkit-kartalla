@@ -4,6 +4,26 @@ import 'leaflet/dist/leaflet.css';
 import MapView from './views/MapView/MapView.vue';
 import AppMenu from './views/AppMenu/AppMenu.vue';
 import DefaultLayout from './layout/DefaultLayout.vue';
+import { provide, ref } from 'vue';
+import type { CurrentLocation } from './types/location';
+import { CurrentLocationInjectionKey } from './injection/location.injection';
+
+const currentLocation = ref<CurrentLocation>({ status: 'pending' });
+
+if ('geolocation' in navigator) {
+  navigator.geolocation.getCurrentPosition(
+    ({ coords: { longitude: lng, latitude: lat }, timestamp }) => {
+      currentLocation.value = { lng, lat, timestamp, status: 'current' };
+    },
+    () => {
+      currentLocation.value = { status: 'blocked' };
+    },
+  );
+} else {
+  currentLocation.value = { status: 'unsupported' };
+}
+
+provide(CurrentLocationInjectionKey, currentLocation);
 </script>
 
 <template>

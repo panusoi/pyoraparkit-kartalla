@@ -10,6 +10,11 @@
       "open": "Open menu",
       "close": "Close menu"
     },
+    "closest": {
+      "pending": "Getting current location...",
+      "blocked": "Location access is blocked.",
+      "unsupported": "Device does not support user location."
+    },
     "parkingSpot": {
       "spots": "spots",
       "frameLock": {

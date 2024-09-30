@@ -3,7 +3,11 @@ import type { ParkingSpot } from '../../types/parking.types';
 import { formatDistance } from '../../utils/distance';
 import ExternalLink from '../ExternalLink.vue';
 
-export type ParkingSpotListItemProps = { spot: ParkingSpot; distance: number; border?: boolean };
+export type ParkingSpotListItemProps = {
+  spot: ParkingSpot;
+  distance: number;
+  border?: boolean;
+};
 
 const { spot, distance, border } = defineProps<ParkingSpotListItemProps>();
 const { id, area, type, status, rack, image } = spot;

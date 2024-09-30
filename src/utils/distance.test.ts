@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 
-import { formatDistance } from './distance';
+import { calculateDistance, formatDistance } from './distance';
 
 describe('distance utils', () => {
   describe('formatDistance', () => {
@@ -31,6 +31,49 @@ describe('distance utils', () => {
       expect(formatDistance(11_000)).toMatchInlineSnapshot(`"> 10 km"`);
       expect(formatDistance(100_000)).toMatchInlineSnapshot(`"> 10 km"`);
       expect(formatDistance(100.1245)).toMatchInlineSnapshot(`"100 m"`);
+    });
+  });
+
+  describe('calculateDistance', () => {
+    it('should return distance between to coordinates in meters', () => {
+      expect(
+        calculateDistance(
+          {
+            lat: 38.8976,
+            lng: -77.0366,
+          },
+          {
+            lat: 39.9496,
+            lng: -75.1503,
+          },
+        ),
+      ).toMatchInlineSnapshot(`199830.22873473688`);
+
+      expect(
+        calculateDistance(
+          {
+            lat: 10,
+            lng: 10,
+          },
+          {
+            lat: 20,
+            lng: 20,
+          },
+        ),
+      ).toMatchInlineSnapshot(`1544757.5610296098`);
+
+      expect(
+        calculateDistance(
+          {
+            lat: -10,
+            lng: 10,
+          },
+          {
+            lat: -20,
+            lng: 20,
+          },
+        ),
+      ).toMatchInlineSnapshot(`1544757.5610296098`);
     });
   });
 });

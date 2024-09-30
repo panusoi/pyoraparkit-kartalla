@@ -10,6 +10,11 @@
       "open": "Avaa valikko",
       "close": "Sulje valikko"
     },
+    "closest": {
+      "pending": "Määritetään sijaintia...",
+      "blocked": "Sijainnin määrittäminen on estetty.",
+      "unsupported": "Laite ei tue käyttäjän sijaintia."
+    },
     "parkingSpot": {
       "spots": "paikkaa",
       "frameLock": {
