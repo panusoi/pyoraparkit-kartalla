@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { ParkingSpot } from '../../types/parking.types';
 import { formatDistance } from '../../utils/distance';
-import IconExternalLink from '../icons/IconExternalLink.vue';
+import ExternalLink from '../ExternalLink.vue';
 
 export type ParkingSpotListItemProps = { spot: ParkingSpot; distance: number; border?: boolean };
 
@@ -51,17 +51,7 @@ const emit = defineEmits<{
       </div>
 
       <div class="mt-4 flex items-center justify-between">
-        <a
-          :href="image"
-          rel="nofollow noopener noreferrer external"
-          target="_blank"
-          class="inline-flex items-center gap-1 font-medium text-blue-600 hover:underline dark:text-blue-500"
-          v-if="image"
-        >
-          {{ $t('parkingSpot.showImage') }}
-          <IconExternalLink />
-        </a>
-
+        <ExternalLink :href="image" v-if="image" :text="$t('parkingSpot.showImage')" />
         <span v-else></span>
         <button
           type="button"
