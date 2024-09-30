@@ -9,6 +9,9 @@ on:
   pull_request:
     branches: ['main']
 
+env:
+  VITE_BUILD_VERSION: $GITHUB_SHA
+
 jobs:
   build:
     runs-on: ubuntu-latest

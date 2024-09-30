@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import ExternalLink from '../../components/ExternalLink.vue';
 import { tampereParkingSpotsUpdatedAt } from '../../data/tampere';
+import { buildVersion } from '../../data/version';
 </script>
 
 <template>
@@ -30,5 +31,6 @@ import { tampereParkingSpotsUpdatedAt } from '../../data/tampere';
         </template>
       </i18next>
     </p>
+    <span>Version: {{ buildVersion }}</span>
   </div>
 </template>
