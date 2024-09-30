@@ -6,6 +6,10 @@
       "info": "Info",
       "settings": "Settings"
     },
+    "menu": {
+      "open": "Open menu",
+      "close": "Close menu"
+    },
     "parkingSpot": {
       "spots": "spots",
       "frameLock": {

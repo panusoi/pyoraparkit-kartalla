@@ -1,6 +1,12 @@
 <script setup lang="ts">
 import 'leaflet/dist/leaflet.css';
-import { LMap, LTileLayer, LControlZoom } from '@vue-leaflet/vue-leaflet';
+import { LMap, LTileLayer, LControlZoom, LControl } from '@vue-leaflet/vue-leaflet';
+import { inject } from 'vue';
+import { MenuOpenInjectionKey, MenuToggleInjectionKey } from '../../injection/menu.injection';
+import IconBars3 from '../../components/icons/IconBars3.vue';
+
+const menuOpen = inject(MenuOpenInjectionKey, null);
+const toggleMenu = inject(MenuToggleInjectionKey, () => undefined);
 </script>
 
 <template>
@@ -18,5 +24,17 @@ import { LMap, LTileLayer, LControlZoom } from '@vue-leaflet/vue-leaflet';
       name="OpenStreetMap"
       attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     ></l-tile-layer>
+    <l-control position="bottomleft">
+      <button
+        :class="[
+          menuOpen ? 'collapse' : 'visible',
+          'bg-slate-50 p-4 hover:bg-slate-200 md:collapse',
+        ]"
+        :aria-label="$t('menu.open')"
+        @click="toggleMenu()"
+      >
+        <IconBars3 />
+      </button>
+    </l-control>
   </l-map>
 </template>

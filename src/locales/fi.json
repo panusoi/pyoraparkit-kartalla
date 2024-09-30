@@ -6,6 +6,10 @@
       "info": "Info",
       "settings": "Asetukset"
     },
+    "menu": {
+      "open": "Avaa valikko",
+      "close": "Sulje valikko"
+    },
     "parkingSpot": {
       "spots": "paikkaa",
       "frameLock": {
