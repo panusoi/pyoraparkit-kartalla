@@ -60,7 +60,7 @@
       "locationMode": {
         "label": "Sijainnin päivitys",
         "options": {
-          "auto": "Automaattinen (15s välein)",
+          "auto": "Automaattinen",
           "manual": "Manuaalinen"
         }
       },

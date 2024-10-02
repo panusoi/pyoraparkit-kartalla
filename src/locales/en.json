@@ -60,15 +60,15 @@
       "locationMode": {
         "label": "Location mode",
         "options": {
-          "auto": "Auto (every 10s)",
+          "auto": "Auto",
           "manual": "Manual"
         }
       },
       "locationHighAccuracy": {
         "label": "Precise location",
         "options": {
-          "true": "Kyllä",
-          "false": "Ei"
+          "true": "Yes",
+          "false": "No"
         }
       }
     }
