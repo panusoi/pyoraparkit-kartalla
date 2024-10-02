@@ -13,7 +13,8 @@
     "closest": {
       "pending": "Getting current location...",
       "blocked": "Location access is blocked.",
-      "unsupported": "Device does not support user location."
+      "unsupported": "Device does not support user location.",
+      "stale": "The location was last updated over 5 minutes ago."
     },
     "parkingSpot": {
       "spots": "spots",

@@ -13,7 +13,8 @@
     "closest": {
       "pending": "Määritetään sijaintia...",
       "blocked": "Sijainnin määrittäminen on estetty.",
-      "unsupported": "Laite ei tue käyttäjän sijaintia."
+      "unsupported": "Laite ei tue käyttäjän sijaintia.",
+      "stale": "Sijainti on päivitetty viimeksi yli 5 minuuttia sitten."
     },
     "parkingSpot": {
       "spots": "paikkaa",
