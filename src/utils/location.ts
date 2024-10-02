@@ -4,8 +4,12 @@ const LOCATION_HIGH_ACCURACY_KEY = 'location-high-accuracy';
 const DEFAULT_LOCATION_MODE = 'auto';
 const DEFAULT_LOCATION_HIGH_ACCURACY_KEY = 'false';
 
-export function getLocationMode() {
-  return localStorage.getItem(LOCATION_MODE_KEY) ?? DEFAULT_LOCATION_MODE;
+export function getLocationMode(): 'auto' | 'manual' {
+  const value = localStorage.getItem(LOCATION_MODE_KEY);
+  if (value === 'auto' || value === 'manual') {
+    return value;
+  }
+  return DEFAULT_LOCATION_MODE;
 }
 
 export function changeLocationMode(mode: string) {
