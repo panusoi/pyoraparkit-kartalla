@@ -18,7 +18,6 @@ const focusedParkingSpot = injectStrict(FocusedParkingSpotInjectionKey);
 const isMenuOpen = injectStrict(IsMenuOpenInjectionKey);
 
 const isStaleCurrentLocation = ref(false);
-const locationStatus = computed(() => currentLocation?.value.status ?? 'pending');
 
 const spots = computed(() => {
   if (currentLocation.value.status === 'current') {
@@ -62,8 +61,8 @@ function onShowOnMap(coordinates: LatLng) {
 </script>
 
 <template>
-  <div v-if="locationStatus !== 'current'">
-    {{ $t(`closest.${locationStatus}`) }}
+  <div v-if="currentLocation.status !== 'current'">
+    {{ $t(`closest.${currentLocation.status}`) }}
   </div>
   <div
     class="mb-1 bg-primary-light-50 p-2 text-center text-red-600 dark:bg-primary-dark-50"
