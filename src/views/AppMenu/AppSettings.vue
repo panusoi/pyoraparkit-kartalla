@@ -4,9 +4,17 @@ import { changeTheme, getTheme } from '../../utils/theme';
 import StyledSelect from '../../components/Form/StyledSelect.vue';
 import { ref, watchEffect } from 'vue';
 import { changeLanguage, getLanguage } from '../../utils/language';
+import {
+  changeLocationHighAccuracy,
+  changeLocationMode,
+  getLocationHighAccuracy,
+  getLocationMode,
+} from '../../utils/location';
 
 const themeSelector = ref(getTheme());
 const languageSelector = ref(getLanguage());
+const locationModeSelector = ref(getLocationMode());
+const locationHighAccuracySelector = ref(`${getLocationHighAccuracy()}`);
 
 watchEffect(() => {
   changeTheme(themeSelector.value);
@@ -14,6 +22,14 @@ watchEffect(() => {
 
 watchEffect(() => {
   changeLanguage(languageSelector.value);
+});
+
+watchEffect(() => {
+  changeLocationMode(locationModeSelector.value);
+});
+
+watchEffect(() => {
+  changeLocationHighAccuracy(locationHighAccuracySelector.value);
 });
 </script>
 
@@ -34,6 +50,24 @@ watchEffect(() => {
         <option value="auto">{{ $t('settings.theme.options.auto') }}</option>
         <option value="light">{{ $t('settings.theme.options.light') }}</option>
         <option value="dark">{{ $t('settings.theme.options.dark') }}</option>
+      </StyledSelect>
+
+      <StyledSelect
+        v-model="locationModeSelector"
+        id="location-mode-selector"
+        :label="$t('settings.locationMode.label')"
+      >
+        <option value="auto">{{ $t('settings.locationMode.options.auto') }}</option>
+        <option value="manual">{{ $t('settings.locationMode.options.manual') }}</option>
+      </StyledSelect>
+
+      <StyledSelect
+        v-model="locationHighAccuracySelector"
+        id="location-mode-selector"
+        :label="$t('settings.locationHighAccuracy.label')"
+      >
+        <option value="true">{{ $t('settings.locationHighAccuracy.options.true') }}</option>
+        <option value="false">{{ $t('settings.locationHighAccuracy.options.false') }}</option>
       </StyledSelect>
     </div>
   </div>

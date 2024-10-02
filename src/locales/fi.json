@@ -55,6 +55,20 @@
           "light": "Vaalea",
           "dark": "Tumma"
         }
+      },
+      "locationMode": {
+        "label": "Sijainnin päivitys",
+        "options": {
+          "auto": "Automaattinen (15s välein)",
+          "manual": "Manuaalinen"
+        }
+      },
+      "locationHighAccuracy": {
+        "label": "Tarkka sijainti",
+        "options": {
+          "true": "Kyllä",
+          "false": "Ei"
+        }
       }
     }
   }
