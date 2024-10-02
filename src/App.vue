@@ -5,29 +5,19 @@ import MapView from './views/MapView/MapView.vue';
 import AppMenu from './views/AppMenu/AppMenu.vue';
 import DefaultLayout from './layout/DefaultLayout.vue';
 import { provide, ref } from 'vue';
-import type { CurrentLocation, LatLng } from './types/location';
+import type { LatLng } from './types/location';
 import {
   CurrentLocationInjectionKey,
   FocusedParkingSpotInjectionKey,
+  ResetLocationInjectionKey,
 } from './injection/location.injection';
+import { useGeolocation } from './composables/useGeolocation';
 
-const currentLocation = ref<CurrentLocation>({ status: 'pending' });
+const geolocation = useGeolocation();
 const focusedParkingSpot = ref<LatLng | null>(null);
 
-if ('geolocation' in navigator) {
-  navigator.geolocation.getCurrentPosition(
-    ({ coords: { longitude: lng, latitude: lat }, timestamp }) => {
-      currentLocation.value = { lng, lat, timestamp, status: 'current' };
-    },
-    () => {
-      currentLocation.value = { status: 'blocked' };
-    },
-  );
-} else {
-  currentLocation.value = { status: 'unsupported' };
-}
-
-provide(CurrentLocationInjectionKey, currentLocation);
+provide(CurrentLocationInjectionKey, geolocation.location);
+provide(ResetLocationInjectionKey, geolocation.reset);
 provide(FocusedParkingSpotInjectionKey, focusedParkingSpot);
 </script>
 

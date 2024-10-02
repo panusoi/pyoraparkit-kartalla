@@ -2,7 +2,7 @@
 import 'leaflet/dist/leaflet.css';
 import { changeTheme, getTheme } from '../../utils/theme';
 import StyledSelect from '../../components/Form/StyledSelect.vue';
-import { ref, watchEffect } from 'vue';
+import { ref, watch, watchEffect } from 'vue';
 import { changeLanguage, getLanguage } from '../../utils/language';
 import {
   changeLocationHighAccuracy,
@@ -10,6 +10,10 @@ import {
   getLocationHighAccuracy,
   getLocationMode,
 } from '../../utils/location';
+import { injectStrict } from '../../utils/inject';
+import { ResetLocationInjectionKey } from '../../injection/location.injection';
+
+const resetGeolocation = injectStrict(ResetLocationInjectionKey);
 
 const themeSelector = ref(getTheme());
 const languageSelector = ref(getLanguage());
@@ -24,12 +28,14 @@ watchEffect(() => {
   changeLanguage(languageSelector.value);
 });
 
-watchEffect(() => {
+watch(locationModeSelector, () => {
   changeLocationMode(locationModeSelector.value);
+  resetGeolocation();
 });
 
-watchEffect(() => {
+watch(locationHighAccuracySelector, () => {
   changeLocationHighAccuracy(locationHighAccuracySelector.value);
+  resetGeolocation();
 });
 </script>
 
