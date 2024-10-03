@@ -1,41 +1,42 @@
 <script setup lang="ts">
 import 'leaflet/dist/leaflet.css';
-import i18next from 'i18next';
-import { applyTheme } from '../../utils/theme';
+import { changeTheme, getTheme } from '../../utils/theme';
 import StyledSelect from '../../components/Form/StyledSelect.vue';
-import { ref } from 'vue';
-import { getLanguage } from '../../utils/language';
+import { ref, watch, watchEffect } from 'vue';
+import { changeLanguage, getLanguage } from '../../utils/language';
+import {
+  changeLocationHighAccuracy,
+  changeLocationMode,
+  getLocationHighAccuracy,
+  getLocationMode,
+} from '../../utils/location';
+import { injectStrict } from '../../utils/inject';
+import { ResetLocationInjectionKey } from '../../injection/location.injection';
 
-function onThemeChange(event: Event) {
-  const theme = (event.target as HTMLSelectElement | null)?.value;
+const resetGeolocation = injectStrict(ResetLocationInjectionKey);
 
-  if (!theme) {
-    return;
-  }
+const themeSelector = ref(getTheme());
+const languageSelector = ref(getLanguage());
+const locationModeSelector = ref(getLocationMode());
+const locationHighAccuracySelector = ref(`${getLocationHighAccuracy()}`);
 
-  if (theme === 'auto') {
-    localStorage.removeItem('theme');
-  } else {
-    localStorage.setItem('theme', theme);
-  }
+watchEffect(() => {
+  changeTheme(themeSelector.value);
+});
 
-  applyTheme();
-}
+watchEffect(() => {
+  changeLanguage(languageSelector.value);
+});
 
-function changeLanguage(event: Event) {
-  const language = (event.target as HTMLSelectElement | null)?.value;
+watch(locationModeSelector, () => {
+  changeLocationMode(locationModeSelector.value);
+  resetGeolocation();
+});
 
-  if (!language) {
-    return;
-  }
-
-  localStorage.setItem('language', language);
-  i18next.changeLanguage(language);
-  currentLanguage.value = language;
-}
-
-const currentTheme = localStorage.getItem('theme') ?? 'auto';
-const currentLanguage = ref(getLanguage());
+watch(locationHighAccuracySelector, () => {
+  changeLocationHighAccuracy(locationHighAccuracySelector.value);
+  resetGeolocation();
+});
 </script>
 
 <template>
@@ -43,27 +44,37 @@ const currentLanguage = ref(getLanguage());
     <h2>{{ $t('tabs.settings') }}</h2>
     <div class="flex flex-col gap-2">
       <StyledSelect
+        v-model="languageSelector"
         id="language-selector"
-        @change="changeLanguage($event)"
-        :value="currentLanguage"
         :label="$t('settings.language.label')"
       >
         <option value="en">{{ $t('settings.language.options.en') }}</option>
         <option value="fi">{{ $t('settings.language.options.fi') }}</option>
       </StyledSelect>
 
-      <div>
-        <StyledSelect
-          id="theme-selector"
-          @change="onThemeChange($event)"
-          :value="currentTheme"
-          :label="$t('settings.theme.label')"
-        >
-          <option value="auto">{{ $t('settings.theme.options.auto') }}</option>
-          <option value="light">{{ $t('settings.theme.options.light') }}</option>
-          <option value="dark">{{ $t('settings.theme.options.dark') }}</option>
-        </StyledSelect>
-      </div>
+      <StyledSelect v-model="themeSelector" id="theme-selector" :label="$t('settings.theme.label')">
+        <option value="auto">{{ $t('settings.theme.options.auto') }}</option>
+        <option value="light">{{ $t('settings.theme.options.light') }}</option>
+        <option value="dark">{{ $t('settings.theme.options.dark') }}</option>
+      </StyledSelect>
+
+      <StyledSelect
+        v-model="locationModeSelector"
+        id="location-mode-selector"
+        :label="$t('settings.locationMode.label')"
+      >
+        <option value="auto">{{ $t('settings.locationMode.options.auto') }}</option>
+        <option value="manual">{{ $t('settings.locationMode.options.manual') }}</option>
+      </StyledSelect>
+
+      <StyledSelect
+        v-model="locationHighAccuracySelector"
+        id="location-mode-selector"
+        :label="$t('settings.locationHighAccuracy.label')"
+      >
+        <option value="true">{{ $t('settings.locationHighAccuracy.options.true') }}</option>
+        <option value="false">{{ $t('settings.locationHighAccuracy.options.false') }}</option>
+      </StyledSelect>
     </div>
   </div>
 </template>

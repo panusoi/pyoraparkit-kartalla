@@ -6,6 +6,9 @@
       "info": "Info",
       "settings": "Asetukset"
     },
+    "map": {
+      "currentLocation": "Näytä sijaintisi"
+    },
     "menu": {
       "open": "Avaa valikko",
       "close": "Sulje valikko"
@@ -13,7 +16,8 @@
     "closest": {
       "pending": "Määritetään sijaintia...",
       "blocked": "Sijainnin määrittäminen on estetty.",
-      "unsupported": "Laite ei tue käyttäjän sijaintia."
+      "unsupported": "Laite ei tue käyttäjän sijaintia.",
+      "stale": "Sijainti on päivitetty viimeksi yli 5 minuuttia sitten."
     },
     "parkingSpot": {
       "spots": "paikkaa",
@@ -54,6 +58,20 @@
           "auto": "Auto",
           "light": "Vaalea",
           "dark": "Tumma"
+        }
+      },
+      "locationMode": {
+        "label": "Sijainnin päivitys",
+        "options": {
+          "auto": "Automaattinen",
+          "manual": "Manuaalinen"
+        }
+      },
+      "locationHighAccuracy": {
+        "label": "Tarkka sijainti",
+        "options": {
+          "true": "Kyllä",
+          "false": "Ei"
         }
       }
     }
