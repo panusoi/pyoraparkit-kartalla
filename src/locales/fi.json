@@ -6,6 +6,9 @@
       "info": "Info",
       "settings": "Asetukset"
     },
+    "map": {
+      "currentLocation": "Näytä sijaintisi"
+    },
     "menu": {
       "open": "Avaa valikko",
       "close": "Sulje valikko"

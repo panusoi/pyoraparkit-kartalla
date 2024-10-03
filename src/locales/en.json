@@ -6,6 +6,9 @@
       "info": "Info",
       "settings": "Settings"
     },
+    "map": {
+      "currentLocation": "Show Your Location"
+    },
     "menu": {
       "open": "Open menu",
       "close": "Close menu"

@@ -8,39 +8,53 @@ import {
   LMarker,
   LCircleMarker,
 } from '@vue-leaflet/vue-leaflet';
-import { ref, watchEffect } from 'vue';
+import { ref, watch, watchEffect } from 'vue';
 import { Bars3Icon } from '@heroicons/vue/20/solid';
 import tampereParkingSpots from '../../data/tampere';
 import {
   CurrentLocationInjectionKey,
   FocusedParkingSpotInjectionKey,
+  RefreshLocationInjectionKey,
 } from '../../injection/location.injection';
 import { IsMenuOpenInjectionKey } from '../../injection/menu.injection';
 import { injectStrict } from '../../utils/inject';
+import IconNavigation from '../../components/IconNavigation.vue';
 
 const center = ref<[number, number]>([61.49911, 23.78712]);
 const currentLocation = injectStrict(CurrentLocationInjectionKey);
 const focusedParkingSpot = injectStrict(FocusedParkingSpotInjectionKey);
 const isMenuOpen = injectStrict(IsMenuOpenInjectionKey);
+const refreshGeolocation = injectStrict(RefreshLocationInjectionKey);
 
-watchEffect(() => {
-  if (currentLocation.value.status === 'current') {
-    center.value = [currentLocation.value.lat, currentLocation.value.lng];
-  }
-});
+watch(
+  currentLocation,
+  () => {
+    if (currentLocation.value.status === 'current') {
+      center.value = [currentLocation.value.lat, currentLocation.value.lng];
+    }
+  },
+  { once: true },
+);
 
 watchEffect(() => {
   if (focusedParkingSpot.value) {
     center.value = [focusedParkingSpot.value.lat, focusedParkingSpot.value.lng];
   }
 });
+
+function currentLocationClick() {
+  if (currentLocation.value.status === 'current') {
+    center.value = [currentLocation.value.lat, currentLocation.value.lng];
+    refreshGeolocation();
+  }
+}
 </script>
 
 <template>
   <l-map
+    v-model:center="center"
     ref="map"
     :zoom="16"
-    :center="center"
     :useGlobalLeaflet="false"
     :options="{ zoomControl: false }"
   >
@@ -63,8 +77,17 @@ watchEffect(() => {
         <Bars3Icon class="size-5" />
       </button>
     </l-control>
+    <l-control position="bottomright">
+      <button
+        :class="['bg-slate-50 p-2 hover:bg-slate-200']"
+        :aria-label="$t('map.currentLocation')"
+        @click="currentLocationClick"
+      >
+        <IconNavigation class="size-5" />
+      </button>
+    </l-control>
     <l-circle-marker
-      v-if="currentLocation?.status === 'current'"
+      v-if="currentLocation.status === 'current'"
       :lat-lng="[currentLocation.lat, currentLocation.lng]"
       :radius="10"
       color="red"

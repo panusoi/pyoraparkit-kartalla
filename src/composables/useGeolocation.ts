@@ -7,6 +7,8 @@ const isSupported = navigator && 'geolocation' in navigator;
 export function useGeolocation() {
   let watcher: number;
   const location = ref<CurrentLocation>({ status: 'pending' });
+  const mode = ref(getLocationMode());
+  const enableHighAccuracy = ref(getLocationHighAccuracy());
 
   if (!isSupported) {
     location.value = { status: 'unsupported' };
@@ -23,27 +25,33 @@ export function useGeolocation() {
     location.value = { status: 'blocked' };
   }
 
-  function reset() {
+  function updateLocation() {
     if (watcher && navigator) {
       navigator.geolocation.clearWatch(watcher);
     }
-
     if (isSupported) {
-      const mode = getLocationMode();
-      const enableHighAccuracy = getLocationHighAccuracy();
-
-      if (mode === 'auto') {
+      if (mode.value === 'auto') {
         watcher = navigator!.geolocation.watchPosition(successCallback, errorCallback, {
-          enableHighAccuracy,
+          enableHighAccuracy: enableHighAccuracy.value,
           maximumAge: 10_000,
         });
       } else {
         navigator!.geolocation.getCurrentPosition(successCallback, errorCallback, {
-          enableHighAccuracy,
+          enableHighAccuracy: enableHighAccuracy.value,
           maximumAge: 10_000,
         });
       }
     }
+  }
+
+  function reset() {
+    mode.value = getLocationMode();
+    enableHighAccuracy.value = getLocationHighAccuracy();
+    updateLocation();
+  }
+
+  function refresh() {
+    updateLocation();
   }
 
   reset();
@@ -57,5 +65,6 @@ export function useGeolocation() {
   return {
     location,
     reset,
+    refresh,
   };
 }

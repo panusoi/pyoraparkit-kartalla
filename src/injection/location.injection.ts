@@ -6,5 +6,7 @@ export const CurrentLocationInjectionKey: InjectionKey<Ref<CurrentLocation>> =
 
 export const ResetLocationInjectionKey: InjectionKey<() => void> = Symbol('ResetLocation');
 
+export const RefreshLocationInjectionKey: InjectionKey<() => void> = Symbol('RefreshLocation');
+
 export const FocusedParkingSpotInjectionKey: InjectionKey<Ref<LatLng | null>> =
   Symbol('FocusedParkingSpot');

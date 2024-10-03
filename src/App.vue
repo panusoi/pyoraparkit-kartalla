@@ -9,6 +9,7 @@ import type { LatLng } from './types/location';
 import {
   CurrentLocationInjectionKey,
   FocusedParkingSpotInjectionKey,
+  RefreshLocationInjectionKey,
   ResetLocationInjectionKey,
 } from './injection/location.injection';
 import { useGeolocation } from './composables/useGeolocation';
@@ -18,6 +19,7 @@ const focusedParkingSpot = ref<LatLng | null>(null);
 
 provide(CurrentLocationInjectionKey, geolocation.location);
 provide(ResetLocationInjectionKey, geolocation.reset);
+provide(RefreshLocationInjectionKey, geolocation.refresh);
 provide(FocusedParkingSpotInjectionKey, focusedParkingSpot);
 </script>
 
