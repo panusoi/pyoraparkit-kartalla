@@ -20,6 +20,7 @@ const emit = defineEmits(['showOnMap']);
       'w-full bg-primary-light-50 dark:bg-primary-dark-50',
       border ? 'border-t border-primary-light-200 dark:border-primary-dark-200' : '',
     ]"
+    :data-testid="`spot-${spot.id}`"
   >
     <div class="px-4 py-5 sm:px-6">
       <div class="flex flex-col items-center justify-between">
@@ -55,6 +56,7 @@ const emit = defineEmits(['showOnMap']);
         <ExternalLink :href="image" v-if="image" :text="$t('parkingSpot.showImage')" />
         <span v-else></span>
         <button
+          :data-testid="`spot-btn-show-${spot.id}`"
           type="button"
           class="font-medium text-blue-600 hover:text-blue-500 dark:text-blue-500 dark:hover:text-blue-600"
           @click="emit('showOnMap')"

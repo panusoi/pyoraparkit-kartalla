@@ -55,6 +55,7 @@ function currentLocationClick() {
     ></l-tile-layer>
     <l-control position="bottomleft">
       <button
+        data-testid="btn-menu-open"
         :class="[
           isMenuOpen ? 'collapse' : 'visible',
           'bg-slate-50 p-4 hover:bg-slate-200 md:collapse',
@@ -67,6 +68,7 @@ function currentLocationClick() {
     </l-control>
     <l-control position="bottomright">
       <button
+        data-testid="btn-current-location"
         :class="['bg-slate-50 p-2 hover:bg-slate-200']"
         :aria-label="$t('map.currentLocation')"
         @click="currentLocationClick"
