@@ -1,40 +1,39 @@
 <script setup lang="ts">
 import 'leaflet/dist/leaflet.css';
-import { changeTheme, getTheme } from '../../utils/theme';
 import StyledSelect from '../../components/Form/StyledSelect.vue';
-import { ref, watch, watchEffect } from 'vue';
-import { changeLanguage, getLanguage } from '../../utils/language';
+import { ref, watch } from 'vue';
 import {
-  changeLocationHighAccuracy,
-  changeLocationMode,
+  getLanguage,
   getLocationHighAccuracy,
   getLocationMode,
-} from '../../utils/location';
-import useGeolocation from '../../composables/useGeolocation';
-
-const { reset: resetGeolocation } = useGeolocation();
+  getTheme,
+} from '../../utils/readSettings';
+import {
+  setLanguage,
+  setLocationHighAccuracy,
+  setLocationMode,
+  setTheme,
+} from '../../utils/saveSettings';
 
 const themeSelector = ref(getTheme());
 const languageSelector = ref(getLanguage());
 const locationModeSelector = ref(getLocationMode());
 const locationHighAccuracySelector = ref(`${getLocationHighAccuracy()}`);
 
-watchEffect(() => {
-  changeTheme(themeSelector.value);
+watch(languageSelector, (newValue) => {
+  setLanguage(newValue);
 });
 
-watchEffect(() => {
-  changeLanguage(languageSelector.value);
+watch(themeSelector, (newValue) => {
+  setTheme(newValue);
 });
 
-watch(locationModeSelector, () => {
-  changeLocationMode(locationModeSelector.value);
-  resetGeolocation();
+watch(locationModeSelector, (newValue) => {
+  setLocationMode(newValue);
 });
 
-watch(locationHighAccuracySelector, () => {
-  changeLocationHighAccuracy(locationHighAccuracySelector.value);
-  resetGeolocation();
+watch(locationHighAccuracySelector, (newValue) => {
+  setLocationHighAccuracy(newValue);
 });
 </script>
 

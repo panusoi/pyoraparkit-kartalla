@@ -1,12 +1,12 @@
-import { onUnmounted, ref } from 'vue';
+import { ref, watchEffect } from 'vue';
 import type { CurrentLocation } from '../types/location';
-import { getLocationHighAccuracy, getLocationMode } from '../utils/location';
+import useSettings from './useSettings';
+
+const { locationMode, locationHighAccuracy } = useSettings();
 
 const isSupported = navigator && 'geolocation' in navigator;
-let watcher: number;
+
 const location = ref<CurrentLocation>({ status: 'pending' });
-const mode = ref(getLocationMode());
-const enableHighAccuracy = ref(getLocationHighAccuracy());
 
 function successCallback({
   coords: { longitude: lng, latitude: lat },
@@ -19,33 +19,38 @@ function errorCallback() {
   location.value = { status: 'blocked' };
 }
 
-function updateLocation() {
-  if (watcher && navigator) {
-    navigator.geolocation.clearWatch(watcher);
-  }
+function getPosition() {
+  navigator!.geolocation.getCurrentPosition(successCallback, errorCallback, {
+    enableHighAccuracy: locationHighAccuracy.value,
+    maximumAge: 10_000,
+  });
+}
+
+watchEffect((onCleanup) => {
+  let watcher: number;
+
   if (isSupported) {
-    if (mode.value === 'auto') {
+    if (locationMode.value === 'auto') {
       watcher = navigator!.geolocation.watchPosition(successCallback, errorCallback, {
-        enableHighAccuracy: enableHighAccuracy.value,
+        enableHighAccuracy: locationHighAccuracy.value,
         maximumAge: 10_000,
       });
     } else {
-      navigator!.geolocation.getCurrentPosition(successCallback, errorCallback, {
-        enableHighAccuracy: enableHighAccuracy.value,
-        maximumAge: 10_000,
-      });
+      getPosition();
     }
   }
-}
 
-function reset() {
-  mode.value = getLocationMode();
-  enableHighAccuracy.value = getLocationHighAccuracy();
-  updateLocation();
-}
+  onCleanup(() => {
+    if (watcher && navigator) {
+      navigator.geolocation.clearWatch(watcher);
+    }
+  });
+}, {});
 
 function refresh() {
-  updateLocation();
+  if (locationMode.value === 'manual') {
+    getPosition();
+  }
 }
 
 export default function useGeolocation() {
@@ -53,19 +58,8 @@ export default function useGeolocation() {
     location.value = { status: 'unsupported' };
   }
 
-  if (location.value.status === 'pending') {
-    reset();
-  }
-
-  onUnmounted(() => {
-    if (watcher && navigator) {
-      navigator.geolocation.clearWatch(watcher);
-    }
-  });
-
   return {
     location,
-    reset,
     refresh,
   };
 }
