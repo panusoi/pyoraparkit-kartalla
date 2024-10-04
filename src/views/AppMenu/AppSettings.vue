@@ -10,7 +10,7 @@ import {
   getLocationHighAccuracy,
   getLocationMode,
 } from '../../utils/location';
-import { useGeolocation } from '../../composables/useGeolocation';
+import useGeolocation from '../../composables/useGeolocation';
 
 const { reset: resetGeolocation } = useGeolocation();
 

@@ -12,7 +12,7 @@ import { watch } from 'vue';
 import { Bars3Icon } from '@heroicons/vue/20/solid';
 import tampereParkingSpots from '../../data/tampere';
 import IconNavigation from '../../components/IconNavigation.vue';
-import { useGeolocation } from '../../composables/useGeolocation';
+import useGeolocation from '../../composables/useGeolocation';
 import useMap from '../../composables/useMap';
 import useMenu from '../../composables/useMenu';
 

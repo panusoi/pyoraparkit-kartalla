@@ -6,7 +6,7 @@ import tampereParkingSpots from '../../data/tampere';
 import { calculateDistance } from '../../utils/distance';
 import type { LatLng } from '../../types/location';
 import { getDistanceToNow } from '../../utils/time';
-import { useGeolocation } from '../../composables/useGeolocation';
+import useGeolocation from '../../composables/useGeolocation';
 import useMap from '../../composables/useMap';
 import useMenu from '../../composables/useMenu';
 

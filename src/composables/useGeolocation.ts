@@ -48,7 +48,7 @@ function refresh() {
   updateLocation();
 }
 
-export function useGeolocation() {
+export default function useGeolocation() {
   if (!isSupported) {
     location.value = { status: 'unsupported' };
   }
