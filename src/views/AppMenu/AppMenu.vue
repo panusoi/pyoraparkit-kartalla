@@ -15,10 +15,11 @@ const { closeMenu } = useMenu();
 </script>
 
 <template>
-  <div class="flex h-full flex-col items-center gap-4">
+  <div class="flex h-full flex-col items-center gap-4" data-testid="menu">
     <div class="just flex w-full flex-row items-center justify-between">
       <h1 class="text-3xl font-bold">{{ $t('name') }}</h1>
       <button
+        data-testid="btn-menu-close"
         type="button"
         class="m-2 rounded-full bg-primary-light-100/20 p-1 text-primary-light-500 hover:text-primary-light-700 md:collapse dark:bg-primary-dark-400/20 dark:text-primary-dark-500 dark:hover:text-primary-dark-700"
         :aria-label="$t('menu.close')"
