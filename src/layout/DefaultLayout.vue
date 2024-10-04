@@ -1,9 +1,6 @@
 <script setup lang="ts">
-import { provide, ref } from 'vue';
-import { IsMenuOpenInjectionKey } from '../injection/menu.injection';
-
-const isMenuOpen = ref(false);
-provide(IsMenuOpenInjectionKey, isMenuOpen);
+import useMenu from '../composables/useMenu';
+const { isMenuOpen } = useMenu();
 </script>
 
 <template>

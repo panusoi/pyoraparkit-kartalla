@@ -1,19 +1,21 @@
 import './assets/main.css';
 
-import { createApp } from 'vue';
+import { createApp, watchEffect } from 'vue';
 import App from './App.vue';
 
 import i18next from 'i18next';
 import I18NextVue from 'i18next-vue';
 import en from './locales/en.json';
 import fi from './locales/fi.json';
-import { applyTheme } from './utils/theme';
-import { getLanguage } from './utils/language';
+
+import useSettings from './composables/useSettings';
+
+const { theme, language } = useSettings();
 
 const app = createApp(App);
 
 i18next.init({
-  lng: getLanguage(),
+  lng: language.value,
   fallbackLng: 'en',
   defaultNS: 'app',
   resources: {
@@ -22,7 +24,20 @@ i18next.init({
   },
 });
 
-applyTheme();
+watchEffect(() => {
+  if (
+    theme.value === 'dark' ||
+    (!('THEME' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+  ) {
+    document.documentElement.classList.add('dark');
+  } else {
+    document.documentElement.classList.remove('dark');
+  }
+});
+
+watchEffect(() => {
+  i18next.changeLanguage(language.value);
+});
 
 app.use(I18NextVue, { i18next });
 app.mount('#app');
