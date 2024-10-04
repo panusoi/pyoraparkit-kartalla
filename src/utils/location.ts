@@ -21,9 +21,7 @@ export function changeLocationMode(mode: string) {
 }
 
 export function getLocationHighAccuracy(): boolean {
-  return Boolean(
-    localStorage.getItem(LOCATION_HIGH_ACCURACY_KEY) ?? DEFAULT_LOCATION_HIGH_ACCURACY_KEY,
-  );
+  return localStorage.getItem(LOCATION_HIGH_ACCURACY_KEY) === 'true';
 }
 
 export function changeLocationHighAccuracy(mode: string) {
