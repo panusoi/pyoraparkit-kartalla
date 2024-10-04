@@ -8,18 +8,17 @@ import {
   LMarker,
   LCircleMarker,
 } from '@vue-leaflet/vue-leaflet';
-import { ref, watch, watchEffect } from 'vue';
+import { watch } from 'vue';
 import { Bars3Icon } from '@heroicons/vue/20/solid';
 import tampereParkingSpots from '../../data/tampere';
-import { FocusedParkingSpotInjectionKey } from '../../injection/location.injection';
 import { IsMenuOpenInjectionKey } from '../../injection/menu.injection';
 import { injectStrict } from '../../utils/inject';
 import IconNavigation from '../../components/IconNavigation.vue';
 import { useGeolocation } from '../../composables/useGeolocation';
+import useMap from '../../composables/useMap';
 
-const center = ref<[number, number]>([61.49911, 23.78712]);
+const { center, focus } = useMap();
 const { location, refresh } = useGeolocation();
-const focusedParkingSpot = injectStrict(FocusedParkingSpotInjectionKey);
 const isMenuOpen = injectStrict(IsMenuOpenInjectionKey);
 
 watch(
@@ -31,12 +30,6 @@ watch(
   },
   { once: true },
 );
-
-watchEffect(() => {
-  if (focusedParkingSpot.value) {
-    center.value = [focusedParkingSpot.value.lat, focusedParkingSpot.value.lng];
-  }
-});
 
 function currentLocationClick() {
   if (location.value.status === 'current') {
@@ -89,8 +82,8 @@ function currentLocationClick() {
       color="red"
     ></l-circle-marker>
     <l-circle-marker
-      v-if="focusedParkingSpot"
-      :lat-lng="[focusedParkingSpot.lat, focusedParkingSpot.lng]"
+      v-if="focus !== null"
+      :lat-lng="focus"
       :radius="10"
       color="blue"
     ></l-circle-marker>

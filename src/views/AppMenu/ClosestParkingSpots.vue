@@ -4,15 +4,15 @@ import ParkingSpotList from '../../components/ParkingSpotList/ParkingSpotList.vu
 import ParkingSpotListItem from '../../components/ParkingSpotList/ParkingSpotListItem.vue';
 import tampereParkingSpots from '../../data/tampere';
 import { calculateDistance } from '../../utils/distance';
-import { FocusedParkingSpotInjectionKey } from '../../injection/location.injection';
 import type { LatLng } from '../../types/location';
 import { IsMenuOpenInjectionKey } from '../../injection/menu.injection';
 import { injectStrict } from '../../utils/inject';
 import { getDistanceToNow } from '../../utils/time';
 import { useGeolocation } from '../../composables/useGeolocation';
+import useMap from '../../composables/useMap';
 
 const { location } = useGeolocation();
-const focusedParkingSpot = injectStrict(FocusedParkingSpotInjectionKey);
+const { setFocus } = useMap();
 const isMenuOpen = injectStrict(IsMenuOpenInjectionKey);
 
 const isStaleCurrentLocation = ref(false);
@@ -53,7 +53,7 @@ watchEffect((cleanup) => {
 });
 
 function onShowOnMap(coordinates: LatLng) {
-  focusedParkingSpot.value = coordinates;
+  setFocus(coordinates);
   isMenuOpen.value = false;
 }
 </script>
