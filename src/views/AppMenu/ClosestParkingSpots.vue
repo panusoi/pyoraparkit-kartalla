@@ -4,24 +4,22 @@ import ParkingSpotList from '../../components/ParkingSpotList/ParkingSpotList.vu
 import ParkingSpotListItem from '../../components/ParkingSpotList/ParkingSpotListItem.vue';
 import tampereParkingSpots from '../../data/tampere';
 import { calculateDistance } from '../../utils/distance';
-import {
-  CurrentLocationInjectionKey,
-  FocusedParkingSpotInjectionKey,
-} from '../../injection/location.injection';
+import { FocusedParkingSpotInjectionKey } from '../../injection/location.injection';
 import type { LatLng } from '../../types/location';
 import { IsMenuOpenInjectionKey } from '../../injection/menu.injection';
 import { injectStrict } from '../../utils/inject';
 import { getDistanceToNow } from '../../utils/time';
+import { useGeolocation } from '../../composables/useGeolocation';
 
-const currentLocation = injectStrict(CurrentLocationInjectionKey);
+const { location } = useGeolocation();
 const focusedParkingSpot = injectStrict(FocusedParkingSpotInjectionKey);
 const isMenuOpen = injectStrict(IsMenuOpenInjectionKey);
 
 const isStaleCurrentLocation = ref(false);
 
 const spots = computed(() => {
-  if (currentLocation.value.status === 'current') {
-    const currentLngLat = currentLocation.value;
+  if (location.value.status === 'current') {
+    const currentLngLat = location.value;
     return tampereParkingSpots
       .map((spot) => ({
         spot,
@@ -34,9 +32,9 @@ const spots = computed(() => {
 });
 
 watchEffect((cleanup) => {
-  if (currentLocation.value.status === 'current') {
+  if (location.value.status === 'current') {
     const staleTime = 300;
-    const seconds = getDistanceToNow(currentLocation.value.timestamp);
+    const seconds = getDistanceToNow(location.value.timestamp);
     isStaleCurrentLocation.value = seconds > staleTime;
 
     if (seconds < staleTime) {
@@ -61,8 +59,8 @@ function onShowOnMap(coordinates: LatLng) {
 </script>
 
 <template>
-  <div v-if="currentLocation.status !== 'current'">
-    {{ $t(`closest.${currentLocation.status}`) }}
+  <div v-if="location.status !== 'current'">
+    {{ $t(`closest.${location.status}`) }}
   </div>
   <div
     class="mb-1 bg-primary-light-50 p-2 text-center text-red-600 dark:bg-primary-dark-50"

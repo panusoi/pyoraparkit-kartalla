@@ -10,10 +10,9 @@ import {
   getLocationHighAccuracy,
   getLocationMode,
 } from '../../utils/location';
-import { injectStrict } from '../../utils/inject';
-import { ResetLocationInjectionKey } from '../../injection/location.injection';
+import { useGeolocation } from '../../composables/useGeolocation';
 
-const resetGeolocation = injectStrict(ResetLocationInjectionKey);
+const { reset: resetGeolocation } = useGeolocation();
 
 const themeSelector = ref(getTheme());
 const languageSelector = ref(getLanguage());

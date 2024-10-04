@@ -11,26 +11,22 @@ import {
 import { ref, watch, watchEffect } from 'vue';
 import { Bars3Icon } from '@heroicons/vue/20/solid';
 import tampereParkingSpots from '../../data/tampere';
-import {
-  CurrentLocationInjectionKey,
-  FocusedParkingSpotInjectionKey,
-  RefreshLocationInjectionKey,
-} from '../../injection/location.injection';
+import { FocusedParkingSpotInjectionKey } from '../../injection/location.injection';
 import { IsMenuOpenInjectionKey } from '../../injection/menu.injection';
 import { injectStrict } from '../../utils/inject';
 import IconNavigation from '../../components/IconNavigation.vue';
+import { useGeolocation } from '../../composables/useGeolocation';
 
 const center = ref<[number, number]>([61.49911, 23.78712]);
-const currentLocation = injectStrict(CurrentLocationInjectionKey);
+const { location, refresh } = useGeolocation();
 const focusedParkingSpot = injectStrict(FocusedParkingSpotInjectionKey);
 const isMenuOpen = injectStrict(IsMenuOpenInjectionKey);
-const refreshGeolocation = injectStrict(RefreshLocationInjectionKey);
 
 watch(
-  currentLocation,
+  location,
   () => {
-    if (currentLocation.value.status === 'current') {
-      center.value = [currentLocation.value.lat, currentLocation.value.lng];
+    if (location.value.status === 'current') {
+      center.value = [location.value.lat, location.value.lng];
     }
   },
   { once: true },
@@ -43,9 +39,9 @@ watchEffect(() => {
 });
 
 function currentLocationClick() {
-  if (currentLocation.value.status === 'current') {
-    center.value = [currentLocation.value.lat, currentLocation.value.lng];
-    refreshGeolocation();
+  if (location.value.status === 'current') {
+    center.value = [location.value.lat, location.value.lng];
+    refresh();
   }
 }
 </script>
@@ -87,8 +83,8 @@ function currentLocationClick() {
       </button>
     </l-control>
     <l-circle-marker
-      v-if="currentLocation.status === 'current'"
-      :lat-lng="[currentLocation.lat, currentLocation.lng]"
+      v-if="location.status === 'current'"
+      :lat-lng="[location.lat, location.lng]"
       :radius="10"
       color="red"
     ></l-circle-marker>

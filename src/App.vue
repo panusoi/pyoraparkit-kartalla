@@ -6,20 +6,9 @@ import AppMenu from './views/AppMenu/AppMenu.vue';
 import DefaultLayout from './layout/DefaultLayout.vue';
 import { provide, ref } from 'vue';
 import type { LatLng } from './types/location';
-import {
-  CurrentLocationInjectionKey,
-  FocusedParkingSpotInjectionKey,
-  RefreshLocationInjectionKey,
-  ResetLocationInjectionKey,
-} from './injection/location.injection';
-import { useGeolocation } from './composables/useGeolocation';
-
-const geolocation = useGeolocation();
+import { FocusedParkingSpotInjectionKey } from './injection/location.injection';
 const focusedParkingSpot = ref<LatLng | null>(null);
 
-provide(CurrentLocationInjectionKey, geolocation.location);
-provide(ResetLocationInjectionKey, geolocation.reset);
-provide(RefreshLocationInjectionKey, geolocation.refresh);
 provide(FocusedParkingSpotInjectionKey, focusedParkingSpot);
 </script>
 
