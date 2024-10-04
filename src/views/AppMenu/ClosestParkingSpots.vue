@@ -5,15 +5,14 @@ import ParkingSpotListItem from '../../components/ParkingSpotList/ParkingSpotLis
 import tampereParkingSpots from '../../data/tampere';
 import { calculateDistance } from '../../utils/distance';
 import type { LatLng } from '../../types/location';
-import { IsMenuOpenInjectionKey } from '../../injection/menu.injection';
-import { injectStrict } from '../../utils/inject';
 import { getDistanceToNow } from '../../utils/time';
 import { useGeolocation } from '../../composables/useGeolocation';
 import useMap from '../../composables/useMap';
+import useMenu from '../../composables/useMenu';
 
 const { location } = useGeolocation();
 const { setFocus } = useMap();
-const isMenuOpen = injectStrict(IsMenuOpenInjectionKey);
+const { closeMenu } = useMenu();
 
 const isStaleCurrentLocation = ref(false);
 
@@ -54,7 +53,7 @@ watchEffect((cleanup) => {
 
 function onShowOnMap(coordinates: LatLng) {
   setFocus(coordinates);
-  isMenuOpen.value = false;
+  closeMenu();
 }
 </script>
 

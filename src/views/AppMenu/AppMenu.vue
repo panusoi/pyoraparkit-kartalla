@@ -9,10 +9,9 @@ import StyledTabPanel from '../../components/Tab/StyledTabPanel.vue';
 import ClosestParkingSpots from './ClosestParkingSpots.vue';
 import AppSettings from './AppSettings.vue';
 import AppInfo from './AppInfo.vue';
-import { IsMenuOpenInjectionKey } from '../../injection/menu.injection';
-import { injectStrict } from '../../utils/inject';
+import useMenu from '../../composables/useMenu';
 
-const isMenuOpen = injectStrict(IsMenuOpenInjectionKey);
+const { closeMenu } = useMenu();
 </script>
 
 <template>
@@ -23,7 +22,7 @@ const isMenuOpen = injectStrict(IsMenuOpenInjectionKey);
         type="button"
         class="m-2 rounded-full bg-primary-light-100/20 p-1 text-primary-light-500 hover:text-primary-light-700 md:collapse dark:bg-primary-dark-400/20 dark:text-primary-dark-500 dark:hover:text-primary-dark-700"
         :aria-label="$t('menu.close')"
-        @click="isMenuOpen = false"
+        @click="closeMenu"
       >
         <XMarkIcon class="size-5" />
       </button>

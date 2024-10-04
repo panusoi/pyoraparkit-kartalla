@@ -11,15 +11,14 @@ import {
 import { watch } from 'vue';
 import { Bars3Icon } from '@heroicons/vue/20/solid';
 import tampereParkingSpots from '../../data/tampere';
-import { IsMenuOpenInjectionKey } from '../../injection/menu.injection';
-import { injectStrict } from '../../utils/inject';
 import IconNavigation from '../../components/IconNavigation.vue';
 import { useGeolocation } from '../../composables/useGeolocation';
 import useMap from '../../composables/useMap';
+import useMenu from '../../composables/useMenu';
 
 const { center, focus } = useMap();
 const { location, refresh } = useGeolocation();
-const isMenuOpen = injectStrict(IsMenuOpenInjectionKey);
+const { isMenuOpen, openMenu } = useMenu();
 
 watch(
   location,
@@ -61,7 +60,7 @@ function currentLocationClick() {
           'bg-slate-50 p-4 hover:bg-slate-200 md:collapse',
         ]"
         :aria-label="$t('menu.open')"
-        @click="isMenuOpen = true"
+        @click="openMenu"
       >
         <Bars3Icon class="size-5" />
       </button>
