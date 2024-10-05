@@ -9,7 +9,7 @@ import {
 
 const { reload } = useSettings();
 
-export function setSetting<T>({ key, value, isValid }: SetSetting<T>) {
+export function setSetting<T extends string>({ key, value, isValid }: SetSetting<T>) {
   if (!isValid(value)) {
     return false;
   }
