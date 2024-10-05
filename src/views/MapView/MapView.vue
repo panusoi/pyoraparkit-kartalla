@@ -16,7 +16,7 @@ import useGeolocation from '../../composables/useGeolocation';
 import useMap from '../../composables/useMap';
 import useMenu from '../../composables/useMenu';
 
-const { center, focus } = useMap();
+const { center, focus, setCenter, setMapReady } = useMap();
 const { location, refresh } = useGeolocation();
 const { isMenuOpen, openMenu } = useMenu();
 
@@ -32,7 +32,7 @@ watch(
 
 function currentLocationClick() {
   if (location.value.status === 'current') {
-    center.value = [location.value.lat, location.value.lng];
+    setCenter(location.value);
     refresh();
   }
 }
@@ -40,11 +40,13 @@ function currentLocationClick() {
 
 <template>
   <l-map
+    data-testid="map"
     v-model:center="center"
     ref="map"
     :zoom="16"
     :useGlobalLeaflet="false"
     :options="{ zoomControl: false }"
+    @ready="setMapReady"
   >
     <l-control-zoom position="bottomright"></l-control-zoom>
     <l-tile-layer
