@@ -1,9 +1,9 @@
 import type { SettingKeyLiteral, SettingKeyBoolean } from '../constants/settings.constants';
 
-export type ReadSetting<T> = {
+export type ReadSetting<T extends string> = {
   key: SettingKeyLiteral;
   defaultValue: T;
-  isValid: (x: any) => x is T;
+  isValid: (x: string) => x is T;
 };
 
 export type ReadBooleanSetting = {
@@ -11,10 +11,10 @@ export type ReadBooleanSetting = {
   defaultValue: boolean;
 };
 
-export type SetSetting<T> = {
+export type SetSetting<T extends string> = {
   key: SettingKeyLiteral;
   value: string;
-  isValid: (x: any) => x is T;
+  isValid: (x: string) => x is T;
 };
 
 export type SetSettingBoolean = {

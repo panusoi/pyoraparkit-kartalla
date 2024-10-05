@@ -7,7 +7,7 @@ import {
   type ReadSetting,
 } from '../types/settings.types';
 
-export function readSetting<T>({ key, defaultValue, isValid }: ReadSetting<T>): T {
+export function readSetting<T extends string>({ key, defaultValue, isValid }: ReadSetting<T>): T {
   const value = localStorage.getItem(key);
   return value && isValid(value) ? value : defaultValue;
 }
