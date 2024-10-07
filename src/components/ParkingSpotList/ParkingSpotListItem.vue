@@ -53,7 +53,12 @@ const emit = defineEmits(['showOnMap']);
       </div>
 
       <div class="mt-4 flex items-center justify-between">
-        <ExternalLink :href="image" v-if="image" :text="$t('parkingSpot.showImage')" />
+        <ExternalLink
+          :data-testid="`ext-img-${spot.id}`"
+          :href="image"
+          v-if="image"
+          :text="$t('parkingSpot.showImage')"
+        />
         <span v-else></span>
         <button
           :data-testid="`spot-btn-show-${spot.id}`"

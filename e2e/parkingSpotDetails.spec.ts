@@ -24,6 +24,9 @@ test('show parking spot details', async ({ page, context }) => {
   await expect(
     page.getByTestId('parking-spot-details').getByTestId('spot-tre:253').getByTestId('distance'),
   ).toHaveText('160 m');
+  await expect(
+    page.getByTestId('parking-spot-details').getByTestId('ext-img-tre:253'),
+  ).toBeVisible();
 
   // Close details
   await page.getByTestId('btn-spot-details-close').click();
