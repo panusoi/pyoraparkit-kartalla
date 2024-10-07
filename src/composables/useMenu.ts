@@ -1,6 +1,7 @@
 import { ref } from 'vue';
+import { autoCloseMenu } from '../utils/menu';
 
-const isMenuOpen = ref<boolean>(false);
+const isMenuOpen = ref<boolean>(autoCloseMenu() === false);
 
 function openMenu() {
   isMenuOpen.value = true;
