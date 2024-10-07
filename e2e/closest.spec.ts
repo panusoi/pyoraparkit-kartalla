@@ -47,7 +47,6 @@ test('show spot on map', async ({ page, context }) => {
     await expect(page.getByTestId('menu')).toBeHidden();
   }
 
-  expectForFocusMarker(page);
   await expectLocationToBeCloseTo(
     page,
     {
@@ -56,4 +55,5 @@ test('show spot on map', async ({ page, context }) => {
     },
     4,
   );
+  await expectForFocusMarker(page);
 });

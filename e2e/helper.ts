@@ -2,12 +2,12 @@ import { expect, Page } from '@playwright/test';
 
 type LatLng = { lat: number; lng: number };
 
-export const expectCurrentLocationMarker = (page: Page) => {
-  expect(page.locator('g > path[stroke="red"]')).toBeVisible();
+export const expectCurrentLocationMarker = async (page: Page) => {
+  await expect(page.locator('g > path[stroke="red"]')).toBeVisible();
 };
 
-export const expectForFocusMarker = (page: Page) => {
-  expect(page.locator('g > path[stroke="blue"]')).toBeVisible();
+export const expectForFocusMarker = async (page: Page) => {
+  await expect(page.locator('g > path[stroke="blue"]')).toBeVisible();
 };
 
 export const getLocation = async (page: Page) => {
@@ -26,9 +26,17 @@ export const expectLocationToBeCloseTo = async (
   { lat, lng }: LatLng,
   numDigits = 5,
 ) => {
-  const { lat: currLat, lng: currLng } = await getLocation(page);
-  expect(currLat).toBeCloseTo(lat, numDigits);
-  expect(currLng).toBeCloseTo(lng, numDigits);
+  await expect
+    .poll(async () => {
+      return (await getLocation(page)).lat;
+    })
+    .toBeCloseTo(lat, numDigits);
+
+  await expect
+    .poll(async () => {
+      return (await getLocation(page)).lng;
+    })
+    .toBeCloseTo(lng, numDigits);
 };
 
 export const expectLocationToNotBeCloseTo = async (
@@ -36,7 +44,15 @@ export const expectLocationToNotBeCloseTo = async (
   { lat, lng }: LatLng,
   numDigits = 5,
 ) => {
-  const { lat: currLat, lng: currLng } = await getLocation(page);
-  expect(currLat).not.toBeCloseTo(lat, numDigits);
-  expect(currLng).not.toBeCloseTo(lng, numDigits);
+  await expect
+    .poll(async () => {
+      return (await getLocation(page)).lat;
+    })
+    .not.toBeCloseTo(lat, numDigits);
+
+  await expect
+    .poll(async () => {
+      return (await getLocation(page)).lng;
+    })
+    .not.toBeCloseTo(lng, numDigits);
 };
