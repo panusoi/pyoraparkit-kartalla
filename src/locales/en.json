@@ -9,6 +9,11 @@
     "map": {
       "currentLocation": "Show Your Location"
     },
+    "parkingSpotDetails": {
+      "open": "Open parking spot details",
+      "close": "Close parking spot details",
+      "showRawData": "Show raw data"
+    },
     "menu": {
       "open": "Open menu",
       "close": "Close menu"
