@@ -4,6 +4,7 @@ import { computed } from 'vue';
 import { calculateDistance, formatDistance } from '../../utils/distance';
 import useParkingSpotDetails from '../../composables/useParkingSpotDetails';
 import useGeolocation from '../../composables/useGeolocation';
+import ExternalLink from '../../components/ExternalLink.vue';
 
 const { location } = useGeolocation();
 const { spot, close } = useParkingSpotDetails();
@@ -78,6 +79,7 @@ const distance = computed(() => {
 
             <div class="mt-4 flex items-center justify-between">
               <ExternalLink
+                :data-testid="`ext-img-${spot.id}`"
                 :href="spot.image"
                 v-if="spot.image"
                 :text="$t('parkingSpot.showImage')"
