@@ -9,6 +9,7 @@ import { getDistanceToNow } from '../../utils/time';
 import useGeolocation from '../../composables/useGeolocation';
 import useMap from '../../composables/useMap';
 import useMenu from '../../composables/useMenu';
+import { autoCloseMenu } from '../../utils/menu';
 
 const { location } = useGeolocation();
 const { setFocus } = useMap();
@@ -53,7 +54,9 @@ watchEffect((cleanup) => {
 
 function onShowOnMap(coordinates: LatLng) {
   setFocus(coordinates);
-  closeMenu();
+  if (autoCloseMenu()) {
+    closeMenu();
+  }
 }
 </script>
 

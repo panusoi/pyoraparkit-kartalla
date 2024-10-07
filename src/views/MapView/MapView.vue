@@ -66,10 +66,7 @@ function markerClick(spot: ParkingSpot) {
     <l-control position="bottomleft">
       <button
         data-testid="btn-menu-open"
-        :class="[
-          isMenuOpen ? 'collapse' : 'visible',
-          'bg-slate-50 p-4 hover:bg-slate-200 md:collapse',
-        ]"
+        :class="[isMenuOpen ? 'collapse' : 'visible', 'bg-slate-50 p-4 hover:bg-slate-200']"
         :aria-label="$t('menu.open')"
         @click="openMenu"
       >
