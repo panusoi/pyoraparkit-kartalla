@@ -8,8 +8,8 @@ import {
 test('show current location on load', async ({ page, context }) => {
   await context.setGeolocation({ latitude: 61.49444, longitude: 23.76364 });
   await page.goto('/');
-  expectCurrentLocationMarker(page);
   await expectLocationToBeCloseTo(page, { lat: 61.49444, lng: 23.76364 });
+  await expectCurrentLocationMarker(page);
 });
 
 test('move to current location on button click', async ({ page, context }) => {
@@ -17,8 +17,8 @@ test('move to current location on button click', async ({ page, context }) => {
 
   // Check that starting location is current location
   await page.goto('/');
-  expectCurrentLocationMarker(page);
   await expectLocationToBeCloseTo(page, { lat: 61.49444, lng: 23.76364 });
+  await expectCurrentLocationMarker(page);
 
   // Drag map
   await page.getByTestId('map').dragTo(page.locator('body'), { targetPosition: { x: 300, y: 0 } });
@@ -26,6 +26,6 @@ test('move to current location on button click', async ({ page, context }) => {
 
   // Move back to current location
   await page.getByTestId('btn-current-location').click();
-  expectCurrentLocationMarker(page);
   await expectLocationToBeCloseTo(page, { lat: 61.49444, lng: 23.76364 });
+  await expectCurrentLocationMarker(page);
 });
