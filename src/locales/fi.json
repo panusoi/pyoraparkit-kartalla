@@ -9,6 +9,11 @@
     "map": {
       "currentLocation": "Näytä sijaintisi"
     },
+    "parkingSpotDetails": {
+      "open": "Avaa pysäköintipaikan tiedot",
+      "close": "Sulje pysäköintipaikan tiedot",
+      "showRawData": "Näytä tekniset tiedot"
+    },
     "menu": {
       "open": "Avaa valikko",
       "close": "Sulje valikko"

@@ -15,10 +15,13 @@ import IconNavigation from '../../components/IconNavigation.vue';
 import useGeolocation from '../../composables/useGeolocation';
 import useMap from '../../composables/useMap';
 import useMenu from '../../composables/useMenu';
+import useParkingSpotDetails from '../../composables/useParkingSpotDetails';
+import type { ParkingSpot } from '../../types/parking.types';
 
-const { center, focus, setCenter, setMapReady } = useMap();
+const { center, focus, setCenter, setMapReady, setFocus } = useMap();
 const { location, refresh } = useGeolocation();
 const { isMenuOpen, openMenu } = useMenu();
+const { open: openParkingSpotDetails } = useParkingSpotDetails();
 
 watch(
   location,
@@ -35,6 +38,11 @@ function currentLocationClick() {
     setCenter(location.value);
     refresh();
   }
+}
+
+function markerClick(spot: ParkingSpot) {
+  setFocus(spot.coordinates);
+  openParkingSpotDetails(spot);
 }
 </script>
 
@@ -91,7 +99,12 @@ function currentLocationClick() {
       color="blue"
     ></l-circle-marker>
     <template v-for="spot in tampereParkingSpots" :key="spot.id">
-      <l-marker :lat-lng="[spot.coordinates.lat, spot.coordinates.lng]"> </l-marker>
+      <l-marker
+        :options="{ title: `${spot.area} (${spot.id})` }"
+        :aria-label="$t('parkingSpotDetails.open')"
+        :lat-lng="[spot.coordinates.lat, spot.coordinates.lng]"
+        @click="markerClick(spot)"
+      ></l-marker>
     </template>
   </l-map>
 </template>
