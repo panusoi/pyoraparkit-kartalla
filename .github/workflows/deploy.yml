@@ -2,22 +2,24 @@ name: Deploy static content to Pages
 
 on:
   workflow_dispatch:
-  workflow_run:
-    workflows: ['Node.js CI', 'Playwright Tests']
-    types: ['completed']
+  push:
     branches: ['main']
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
 
 concurrency:
   group: 'pages'
   cancel-in-progress: false
 
 jobs:
+  build:
+    uses: ./.github/workflows/node.js.yml
+  playwright:
+    uses: ./.github/workflows/playwright.yml
   deploy:
+    needs: [build, playwright]
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
