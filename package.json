@@ -43,7 +43,6 @@
     "@vue/tsconfig": "^0.5.1",
     "autoprefixer": "^10.4.20",
     "cross-env": "^7.0.3",
-    "crossenv": "^0.0.2-security",
     "epsg-index": "^2.0.0",
     "eslint": "^9.0.0",
     "eslint-plugin-vue": "^9.28.0",
