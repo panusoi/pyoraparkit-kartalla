@@ -6,6 +6,7 @@ import {
   type ReadBooleanSetting,
   type ReadSetting,
 } from '../types/settings.types';
+import { getDefaultLanguage } from './language';
 
 export function readSetting<T extends string>({ key, defaultValue, isValid }: ReadSetting<T>): T {
   const value = localStorage.getItem(key);
@@ -29,7 +30,7 @@ export function readBooleanSetting({ key, defaultValue }: ReadBooleanSetting): b
 export function getLanguage() {
   return readSetting({
     key: 'LANGUAGE',
-    defaultValue: DEFAULTS.LANGUAGE,
+    defaultValue: getDefaultLanguage(),
     isValid: isLanguage,
   });
 }

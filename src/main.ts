@@ -37,6 +37,7 @@ watchEffect(() => {
 
 watchEffect(() => {
   i18next.changeLanguage(language.value);
+  document.querySelector('html')?.setAttribute('lang', language.value);
 });
 
 app.use(I18NextVue, { i18next });

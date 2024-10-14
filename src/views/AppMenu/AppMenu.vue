@@ -32,13 +32,13 @@ const { closeMenu } = useMenu();
     <div class="flex h-full min-h-0 w-full max-w-prose flex-col gap-2">
       <TabGroup>
         <StyledTabList>
-          <StyledTabButton>
+          <StyledTabButton data-testid="tab-closest">
             {{ $t('tabs.closest') }}
           </StyledTabButton>
-          <StyledTabButton>
+          <StyledTabButton data-testid="tab-info">
             {{ $t('tabs.info') }}
           </StyledTabButton>
-          <StyledTabButton>
+          <StyledTabButton data-testid="tab-settings">
             {{ $t('tabs.settings') }}
           </StyledTabButton>
         </StyledTabList>
