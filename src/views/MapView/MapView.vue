@@ -7,6 +7,7 @@ import {
   LControl,
   LMarker,
   LCircleMarker,
+  LIcon,
 } from '@vue-leaflet/vue-leaflet';
 import { watch } from 'vue';
 import { Bars3Icon } from '@heroicons/vue/20/solid';
@@ -17,11 +18,33 @@ import useMap from '../../composables/useMap';
 import useMenu from '../../composables/useMenu';
 import useParkingSpotDetails from '../../composables/useParkingSpotDetails';
 import type { ParkingSpot } from '../../types/parking.types';
+import {
+  markerBike,
+  markerBikeWithLock,
+  markerConnection,
+  markerConnectionWithLock,
+} from '../../assets/markers';
 
 const { center, focus, setCenter, setMapReady, setFocus } = useMap();
 const { location, refresh } = useGeolocation();
 const { isMenuOpen, openMenu } = useMenu();
 const { open: openParkingSpotDetails } = useParkingSpotDetails();
+
+function getParkingSpotIcon(spot: ParkingSpot) {
+  if (spot.type === 'BIKE_PARKING') {
+    if (spot.rack?.frameLock === true) {
+      return markerBikeWithLock;
+    }
+    return markerBike;
+  }
+  if (spot.type === 'CONNECTION_PARKING') {
+    if (spot.rack?.frameLock === true) {
+      return markerConnectionWithLock;
+    }
+    return markerConnection;
+  }
+  return '';
+}
 
 watch(
   location,
@@ -101,7 +124,13 @@ function markerClick(spot: ParkingSpot) {
         :aria-label="$t('parkingSpotDetails.open')"
         :lat-lng="[spot.coordinates.lat, spot.coordinates.lng]"
         @click="markerClick(spot)"
-      ></l-marker>
+      >
+        <l-icon
+          :icon-url="getParkingSpotIcon(spot)"
+          :icon-anchor="[18, 40]"
+          :icon-size="[37, 41]"
+        />
+      </l-marker>
     </template>
   </l-map>
 </template>

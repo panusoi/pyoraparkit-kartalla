@@ -42,6 +42,11 @@
       "showOnMap": "Näytä kartalla"
     },
     "info": {
+      "markers": {
+        "header": "Karttamerkit",
+        "currentLocation": "Nykyinen sijainti",
+        "focusMarker": "Kohdistettu karttamerkki"
+      },
       "dataSources": {
         "header": "Tietolähteet",
         "tampere": {
