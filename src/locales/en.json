@@ -42,6 +42,11 @@
       "showOnMap": "Show on Map"
     },
     "info": {
+      "markers": {
+        "header": "Markers",
+        "currentLocation": "Your location",
+        "focusMarker": "Focused marker"
+      },
       "dataSources": {
         "header": "Data sources",
         "tampere": {
