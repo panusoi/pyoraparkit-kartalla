@@ -89,37 +89,39 @@ const parseRawData = (data: RawData): ParkingSpot[] => {
     return undefined;
   };
 
-  return data.features.map(
-    ({
-      properties: {
-        alue,
-        id,
-        kuva_url,
-        paikkamaara,
-        pysakointipaikan_tyyppi,
-        runkolukittavuus,
-        telinemaara,
-        telinemalli,
-        telinevalmistaja,
-        tila,
-      },
-      geometry,
-    }) => ({
-      area: alue,
-      id: `tre:${id}`,
-      coordinates: getCoordinates(geometry),
-      rack: {
-        count: telinemaara ?? undefined,
-        spots: paikkamaara ?? undefined,
-        model: telinemalli ?? undefined,
-        manufacturer: telinevalmistaja ?? undefined,
-        frameLock: getFrameLock(runkolukittavuus),
-      },
-      status: getStatus(tila),
-      type: getType(pysakointipaikan_tyyppi),
-      image: getImage(kuva_url),
-    }),
-  );
+  return data.features
+    .sort((a, b) => Number(a.properties.id) - Number(b.properties.id))
+    .map(
+      ({
+        properties: {
+          alue,
+          id,
+          kuva_url,
+          paikkamaara,
+          pysakointipaikan_tyyppi,
+          runkolukittavuus,
+          telinemaara,
+          telinemalli,
+          telinevalmistaja,
+          tila,
+        },
+        geometry,
+      }) => ({
+        area: alue,
+        id: `tre:${id}`,
+        coordinates: getCoordinates(geometry),
+        rack: {
+          count: telinemaara ?? undefined,
+          spots: paikkamaara ?? undefined,
+          model: telinemalli ?? undefined,
+          manufacturer: telinevalmistaja ?? undefined,
+          frameLock: getFrameLock(runkolukittavuus),
+        },
+        status: getStatus(tila),
+        type: getType(pysakointipaikan_tyyppi),
+        image: getImage(kuva_url),
+      }),
+    );
 };
 
 const outputTemplate = `
