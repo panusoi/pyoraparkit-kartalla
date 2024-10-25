@@ -21,6 +21,9 @@
     "closest": {
       "pending": "Määritetään sijaintia...",
       "blocked": "Sijainnin määrittäminen on estetty.",
+      "timeout": "Sijainnin määrittäminen aikakatkaistiin.",
+      "error": "Sijainnin määrittämisessä tapahtui tuntematon virhe.",
+      "unavailable": "Laite ei pysty palauttamaan käyttäjän sijaintia.",
       "unsupported": "Laite ei tue käyttäjän sijaintia.",
       "stale": "Sijainti on päivitetty viimeksi yli 5 minuuttia sitten."
     },

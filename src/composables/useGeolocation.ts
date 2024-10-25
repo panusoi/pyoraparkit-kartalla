@@ -1,6 +1,7 @@
 import { ref, watchEffect } from 'vue';
 import type { CurrentLocation } from '../types/location';
 import useSettings from './useSettings';
+import { geolocationPositionErrorToStatus } from '../utils/geolocation';
 
 const { locationMode, locationHighAccuracy } = useSettings();
 
@@ -15,8 +16,8 @@ function successCallback({
   location.value = { lng, lat, timestamp, status: 'current' };
 }
 
-function errorCallback() {
-  location.value = { status: 'blocked' };
+function errorCallback(error: GeolocationPositionError) {
+  location.value = { status: geolocationPositionErrorToStatus(error) };
 }
 
 function getPosition() {

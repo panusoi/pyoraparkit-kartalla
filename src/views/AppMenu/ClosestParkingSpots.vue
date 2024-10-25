@@ -61,7 +61,7 @@ function onShowOnMap(coordinates: LatLng) {
 </script>
 
 <template>
-  <div v-if="location.status !== 'current'">
+  <div v-if="location.status !== 'current'" :data-testid="`location-status-${location.status}`">
     {{ $t(`closest.${location.status}`) }}
   </div>
   <div
