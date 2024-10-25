@@ -21,8 +21,11 @@
     "closest": {
       "pending": "Getting current location...",
       "blocked": "Location access is blocked.",
+      "timeout": "Location request timed out.",
+      "error": "Something went wrong while retrieving the current location.",
+      "unavailable": "Device cannot retrieve the user's location.",
       "unsupported": "Device does not support user location.",
-      "stale": "The location was last updated over 5 minutes ago."
+      "stale": "The location was last updated more than 5 minutes ago."
     },
     "parkingSpot": {
       "spots": "spots",
