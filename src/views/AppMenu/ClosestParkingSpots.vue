@@ -65,7 +65,7 @@ function onShowOnMap(coordinates: LatLng) {
     {{ $t(`closest.${location.status}`) }}
   </div>
   <div
-    class="mb-1 bg-primary-light-50 p-2 text-center text-red-600 dark:bg-primary-dark-50"
+    class="bg-primary-light-50 dark:bg-primary-dark-50 mb-1 p-2 text-center text-red-600"
     v-if="isStaleCurrentLocation"
   >
     {{ $t('closest.stale') }}

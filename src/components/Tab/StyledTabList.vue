@@ -4,7 +4,7 @@ import { TabList } from '@headlessui/vue';
 
 <template>
   <TabList
-    class="flex flex-row gap-1 rounded-xl bg-primary-light-600/20 p-1 dark:bg-primary-dark-600/20"
+    class="bg-primary-light-600/20 dark:bg-primary-dark-600/20 flex flex-row gap-1 rounded-xl p-1"
     ><slot></slot
   ></TabList>
 </template>
