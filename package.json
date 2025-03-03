@@ -41,7 +41,7 @@
     "@vue/eslint-config-prettier": "^10.2.0",
     "@vue/eslint-config-typescript": "^14.4.0",
     "@vue/test-utils": "^2.4.6",
-    "@vue/tsconfig": "^0.6.0",
+    "@vue/tsconfig": "^0.7.0",
     "cross-env": "^7.0.3",
     "epsg-index": "^2.0.0",
     "eslint": "^9.21.0",
