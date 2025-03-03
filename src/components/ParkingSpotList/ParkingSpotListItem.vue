@@ -17,14 +17,14 @@ const emit = defineEmits(['showOnMap']);
 <template>
   <li
     :class="[
-      'w-full bg-primary-light-50 dark:bg-primary-dark-50',
-      border ? 'border-t border-primary-light-200 dark:border-primary-dark-200' : '',
+      'bg-primary-light-50 dark:bg-primary-dark-50 w-full',
+      border ? 'border-primary-light-200 dark:border-primary-dark-200 border-t' : '',
     ]"
     :data-testid="`spot-${spot.id}`"
   >
     <div class="px-4 py-5 sm:px-6">
       <div class="flex flex-col items-center justify-between">
-        <h3 class="inline-flex flex-col items-center text-lg font-medium leading-6">
+        <h3 class="inline-flex flex-col items-center text-lg leading-6 font-medium">
           <span data-testid="distance">{{ formatDistance(distance) }}</span>
           <small v-if="area">
             <span>{{ area }}</span>

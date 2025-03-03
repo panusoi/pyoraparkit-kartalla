@@ -27,7 +27,7 @@ const distance = computed(() => {
       <button
         data-testid="btn-spot-details-close"
         type="button"
-        class="m-2 rounded-full bg-primary-light-100/20 p-1 text-primary-light-500 hover:text-primary-light-700 dark:bg-primary-dark-400/20 dark:text-primary-dark-500 dark:hover:text-primary-dark-700"
+        class="bg-primary-light-100/20 text-primary-light-500 hover:text-primary-light-700 dark:bg-primary-dark-400/20 dark:text-primary-dark-500 dark:hover:text-primary-dark-700 m-2 rounded-full p-1"
         :aria-label="$t('parkingSpotDetails.close')"
         @click="close"
       >
@@ -38,18 +38,18 @@ const distance = computed(() => {
     <template v-if="spot">
       <div
         :class="[
-          'flex w-full flex-col gap-2 bg-primary-light-600/20 p-3 text-black dark:bg-primary-dark-600/20 dark:text-white',
-          true ? 'border-t border-primary-light-200 dark:border-primary-dark-200' : '',
+          'bg-primary-light-600/20 dark:bg-primary-dark-600/20 flex w-full flex-col gap-2 p-3 text-black dark:text-white',
+          true ? 'border-primary-light-200 dark:border-primary-dark-200 border-t' : '',
         ]"
         :data-testid="`spot-${spot.id}`"
       >
         <div
-          class="w-full bg-primary-light-50 dark:bg-primary-dark-50"
+          class="bg-primary-light-50 dark:bg-primary-dark-50 w-full"
           :data-testid="`spot-${spot.id}`"
         >
           <div class="px-4 py-5 sm:px-6">
             <div class="flex flex-col items-center justify-between">
-              <h2 class="inline-flex flex-col items-center text-lg font-medium leading-6">
+              <h2 class="inline-flex flex-col items-center text-lg leading-6 font-medium">
                 <span data-testid="distance">{{ formatDistance(distance) }}</span>
                 <small v-if="spot.area">
                   <span>{{ spot.area }}</span>
@@ -87,7 +87,7 @@ const distance = computed(() => {
             </div>
           </div>
         </div>
-        <details class="w-full overflow-x-auto bg-primary-light-50 p-2 dark:bg-primary-dark-50">
+        <details class="bg-primary-light-50 dark:bg-primary-dark-50 w-full overflow-x-auto p-2">
           <summary>{{ $t('parkingSpotDetails.showRawData') }}</summary>
           <pre>{{ JSON.stringify(spot, null, 2) }}</pre>
         </details>

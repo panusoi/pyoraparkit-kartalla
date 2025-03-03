@@ -21,7 +21,7 @@ const { closeMenu } = useMenu();
       <button
         data-testid="btn-menu-close"
         type="button"
-        class="m-2 rounded-full bg-primary-light-100/20 p-1 text-primary-light-500 hover:text-primary-light-700 dark:bg-primary-dark-400/20 dark:text-primary-dark-500 dark:hover:text-primary-dark-700"
+        class="bg-primary-light-100/20 text-primary-light-500 hover:text-primary-light-700 dark:bg-primary-dark-400/20 dark:text-primary-dark-500 dark:hover:text-primary-dark-700 m-2 rounded-full p-1"
         :aria-label="$t('menu.close')"
         @click="closeMenu"
       >
