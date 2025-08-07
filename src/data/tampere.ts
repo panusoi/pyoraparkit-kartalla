@@ -1721,24 +1721,6 @@ const tampereParkingSpots: ParkingSpot[] = [
     image: 'https://kartat.tampere.fi/valokuvia/isot_sensuroitu/110.JPG',
   },
   {
-    area: 'Rantaperkiö',
-    id: 'tre:111',
-    coordinates: {
-      lng: 23.75044985398452,
-      lat: 61.46989255709386,
-    },
-    rack: {
-      count: 2,
-      spots: 10,
-      model: 'Kotkansiipi',
-      manufacturer: 'Finture',
-      frameLock: true,
-    },
-    status: 'IN_USE',
-    type: 'CONNECTION_PARKING',
-    image: 'https://kartat.tampere.fi/valokuvia/isot_sensuroitu/111.JPG',
-  },
-  {
     area: 'Ryydynpohja',
     id: 'tre:112',
     coordinates: {
@@ -3114,15 +3096,15 @@ const tampereParkingSpots: ParkingSpot[] = [
     area: 'Kyttälä A',
     id: 'tre:191',
     coordinates: {
-      lng: 23.765916481390125,
-      lat: 61.50001797177133,
+      lng: 23.765939181574677,
+      lat: 61.50001676803569,
     },
     rack: {
-      count: 2,
-      spots: 12,
-      model: 'Treo',
+      count: 5,
+      spots: 10,
+      model: 'U2',
       manufacturer: 'Lehtovuori',
-      frameLock: false,
+      frameLock: true,
     },
     status: 'IN_USE',
     type: 'BIKE_PARKING',
@@ -6567,22 +6549,6 @@ const tampereParkingSpots: ParkingSpot[] = [
   },
   {
     area: 'Hervanta',
-    id: 'tre:405',
-    coordinates: {
-      lng: 23.837638349104257,
-      lat: 61.45060224407222,
-    },
-    rack: {
-      count: 2,
-      spots: 10,
-      frameLock: false,
-    },
-    status: 'IN_USE',
-    type: 'BIKE_PARKING',
-    image: 'https://kartat.tampere.fi/valokuvia/isot_sensuroitu/405.JPG',
-  },
-  {
-    area: 'Hervanta',
     id: 'tre:407',
     coordinates: {
       lng: 23.844553909280663,
@@ -7572,38 +7538,6 @@ const tampereParkingSpots: ParkingSpot[] = [
     status: 'IN_USE',
     type: 'BIKE_PARKING',
     image: 'https://kartat.tampere.fi/valokuvia/isot_sensuroitu/468.JPG',
-  },
-  {
-    area: 'Lamminpää',
-    id: 'tre:469',
-    coordinates: {
-      lng: 23.624717230088596,
-      lat: 61.52029410785791,
-    },
-    rack: {
-      count: 3,
-      spots: 60,
-      frameLock: false,
-    },
-    status: 'IN_USE',
-    type: 'BIKE_PARKING',
-    image: 'https://kartat.tampere.fi/valokuvia/isot_sensuroitu/469.JPG',
-  },
-  {
-    area: 'Lamminpää',
-    id: 'tre:470',
-    coordinates: {
-      lng: 23.624980202387402,
-      lat: 61.52029022269093,
-    },
-    rack: {
-      count: 3,
-      spots: 60,
-      frameLock: false,
-    },
-    status: 'IN_USE',
-    type: 'BIKE_PARKING',
-    image: 'https://kartat.tampere.fi/valokuvia/isot_sensuroitu/470.JPG',
   },
   {
     area: 'Niemi',
@@ -8897,8 +8831,8 @@ const tampereParkingSpots: ParkingSpot[] = [
     area: 'Tampella',
     id: 'tre:551',
     coordinates: {
-      lng: 23.766740904672197,
-      lat: 61.50745556694329,
+      lng: 23.76702727835771,
+      lat: 61.50763291952801,
     },
     rack: {
       count: 4,
@@ -10639,7 +10573,89 @@ const tampereParkingSpots: ParkingSpot[] = [
     type: 'BIKE_PARKING',
     image: 'https://kartat.tampere.fi/valokuvia/isot_sensuroitu/651.JPG',
   },
+  {
+    area: 'Tampella',
+    id: 'tre:652',
+    coordinates: {
+      lng: 23.767811188146382,
+      lat: 61.507676199814966,
+    },
+    rack: {
+      count: 4,
+      spots: 8,
+      frameLock: true,
+    },
+    status: 'IN_USE',
+    type: 'BIKE_PARKING',
+    image: 'https://kartat.tampere.fi/valokuvia/isot_sensuroitu/652.JPG',
+  },
+  {
+    area: 'Tampella',
+    id: 'tre:653',
+    coordinates: {
+      lng: 23.767652671617483,
+      lat: 61.50679900201735,
+    },
+    rack: {
+      count: 8,
+      spots: 16,
+      frameLock: true,
+    },
+    status: 'IN_USE',
+    type: 'BIKE_PARKING',
+    image: 'https://kartat.tampere.fi/valokuvia/isot_sensuroitu/653.JPG',
+  },
+  {
+    area: 'Särkänniemi',
+    id: 'tre:654',
+    coordinates: {
+      lng: 23.7470765002786,
+      lat: 61.5030199569904,
+    },
+    rack: {
+      count: 27,
+      spots: 54,
+      model: 'U2',
+      manufacturer: 'Lehtovuori',
+      frameLock: true,
+    },
+    status: 'IN_USE',
+    type: 'BIKE_PARKING',
+    image: 'https://kartat.tampere.fi/valokuvia/isot_sensuroitu/654.JPG',
+  },
+  {
+    area: 'Finlayson',
+    id: 'tre:655',
+    coordinates: {
+      lng: 23.748626032580816,
+      lat: 61.50403279957659,
+    },
+    rack: {
+      count: 3,
+      spots: 6,
+      frameLock: true,
+    },
+    status: 'IN_USE',
+    type: 'BIKE_PARKING',
+    image: 'https://kartat.tampere.fi/valokuvia/isot_sensuroitu/655.JPG',
+  },
+  {
+    area: 'Finlayson',
+    id: 'tre:656',
+    coordinates: {
+      lng: 23.750820669430755,
+      lat: 61.50489230952191,
+    },
+    rack: {
+      count: 4,
+      spots: 8,
+      frameLock: true,
+    },
+    status: 'IN_USE',
+    type: 'BIKE_PARKING',
+    image: 'https://kartat.tampere.fi/valokuvia/isot_sensuroitu/656.JPG',
+  },
 ];
 
-export const tampereParkingSpotsUpdatedAt = '2025-03-03';
+export const tampereParkingSpotsUpdatedAt = '2025-08-07';
 export default tampereParkingSpots;
